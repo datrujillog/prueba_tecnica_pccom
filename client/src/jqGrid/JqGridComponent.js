@@ -65,10 +65,16 @@ const JqGridComponent = () => {
                         lastsel = id;
                     }
                 },
-                editurl: 'http://localhost:5000/api/user/update',  // URL para editar
+                editurl: 'http://localhost:5000/api/user/create',  // URL para editar
                 // mtype: 'PUT',          
                 caption: "Prueba Tecnica en PCCOM " // Título de la tabla
             });
+            //update
+            // jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true });  // esta linea es para que aparezcan los botones de editar, agregar y eliminar
+            // //add
+            // jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true });
+            // //delete
+            // jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true });
         });
     }, []);
 
@@ -77,6 +83,9 @@ const JqGridComponent = () => {
             <h2>Ejemplo de jqGrid en React</h2>
             <table id="rowed3"></table>
             <div id="prowed3"></div>
+            <button onClick={() => { 
+                jQuery("#rowed3").jqGrid('editGridRow', "new", {height:280,reloadAfterSubmit:false}); 
+                }}>Agregar</button>
 
         </div>
     );
