@@ -19,7 +19,7 @@ import 'jquery-ui/ui/widgets/accordion';
 
 
 const JqGridComponent = () => {
-    const [jqgridData, setjqGridData] = useState([]);
+    // const [jqgridData, setjqGridData] = useState([]);
 
     //traer los dastos del api y setearlos en el estado
     //     useEffect(() => {
