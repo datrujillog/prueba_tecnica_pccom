@@ -1,0 +1,30 @@
+/* Estilos para la tabla */
+.ui-jqgrid {
+    width: 100%;
+  }
+  
+  /* Estilos para las celdas de encabezado */
+  .ui-jqgrid .ui-jqgrid-hdiv {
+    background-color: #f2f2f2; /* Color de fondo del encabezado */
+  }
+  
+  /* Estilos para las filas alternas */
+  .ui-jqgrid tr.jqgrow:nth-child(even) {
+    background-color: #f9f9f9; /* Color de fondo de las filas alternas */
+  }
+  
+  /* Estilos para las filas impares */
+  .ui-jqgrid tr.jqgrow:nth-child(odd) {
+    background-color: #ffffff; /* Color de fondo de las filas impares */
+  }
+  
+  /* Estilos para las celdas */
+  .ui-jqgrid tr.jqgrow td {
+    padding: 5px; /* Espaciado interno de las celdas */
+  }
+  
+  /* Estilos para el paginador */
+  .ui-jqgrid .ui-pg-table {
+    background-color: #f2f2f2; /* Color de fondo del paginador */
+  }
+  
