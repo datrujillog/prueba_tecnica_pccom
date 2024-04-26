@@ -41,8 +41,6 @@ class UserRouter {
             try {
 
                 const response = await userService.getAllUsers();
-                // if (!response.success) throw new Error(response.error.message);
-                // const { users } = response;
                 res.send(response)
 
             } catch (error) {
