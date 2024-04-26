@@ -72,9 +72,6 @@ const JqGridComponent = () => {
             });
             // jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true });
         });
-
-
-
     }, []);
 
     return (
