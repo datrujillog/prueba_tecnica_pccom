@@ -76,11 +76,9 @@ class UserRouter {
                 if (oper == 'add') {
                     try {
                         const response = await userService.createUser(body);
-
                         res.send(response)
                     } catch (error) {
                         errorResponse(res, error.message);
-
                     }
 
                 } else {
@@ -92,11 +90,6 @@ class UserRouter {
                         user
                     });
                 }
-
-
-
-
-
             } catch (error) {
                 errorResponse(res, error.message);
             }
