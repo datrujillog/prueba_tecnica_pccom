@@ -79,6 +79,7 @@ class UserRepository {
     async updateUser(id, data) {
 
         try {
+            if(!id) throw new BadRequest("Id is required");
 
             const user = await this.#userModel.update({
                 where: {
@@ -95,7 +96,7 @@ class UserRepository {
             };
 
         } catch (error) {
-            throw new BadRequest(error.message);
+            throw new BadRequest(error);
         }
     }
 
@@ -109,12 +110,12 @@ class UserRepository {
                 }
             });
 
-            if (user.count === 0) throw new Error("User not found");
+            if (user.count === 0) throw new NotFound("User not found");
 
             return user;
 
         } catch (error) {
-            throw error
+            throw new BadRequest(error.message);
         }
     }
 

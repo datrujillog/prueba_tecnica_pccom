@@ -44,7 +44,7 @@ class UserRouter {
                 res.send(response)
 
             } catch (error) {
-                throw new BadRequest(error.message)
+                errorResponse(res, error.message);
             }
         });
 
@@ -89,7 +89,7 @@ class UserRouter {
                 });
 
             } catch (error) {
-                throw error
+                errorResponse(res, error.message);
             }
         });
 

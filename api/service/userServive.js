@@ -1,4 +1,4 @@
-const parseDatos = require("../helpers/normalizeData");
+const {parseDatos,parseDatosUpdate} = require("../helpers/normalizeData");
 const { BadRequest } = require("../middleware/error");
 const userRepository = require("../repository/userRepository");
 
@@ -38,8 +38,10 @@ class UserService {
 
     async updateUser(id, data) {
 
+        // const parseUpdate = await parseDatosUpdate(id);
+
         delete data.id;
-        const user = await userRepository.updateUser(id, data);
+        const user = await userRepository.updateUser(id, data); 
 
         return {
             success: true,
