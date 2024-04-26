@@ -22,7 +22,7 @@ class UserRepository {
 
         try {
 
-            const user = await this.#userModel.create({ data });
+            const user = await this.#userModel.createMany({ data });
 
             if (!user) throw new Error("User not created")
 

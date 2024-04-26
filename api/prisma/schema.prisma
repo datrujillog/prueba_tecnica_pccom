@@ -17,5 +17,6 @@ model User {
   id        String   @id @default(cuid())
   Name      String?
   LastName  String?
-  Email     String   @unique
+  Email     String   
+  oper      String?
 }

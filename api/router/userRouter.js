@@ -24,7 +24,7 @@ class UserRouter {
                 const response = await userService.createUser(body);
                 // if (!response.success) throw new Error(response.error.message);
                 const { user } = response;
-                res.json(user)
+                res.json(response)
 
             } catch (error) {
                 throw error
@@ -65,12 +65,13 @@ class UserRouter {
                 }
             });
 
-        this.router.put("/update/:id", async (req, res) => {
+        this.router.post("/update", async (req, res) => {
             try {
 
-                const { id } = req.params;
+                // const { id } = req.params;
                 const body = req.body;
-                const response = await userService.updateUser(id, body);
+                const userId = req.body.id;
+                const response = await userService.updateUser(userId, body);
                 if (!response.success) throw new Error(response.error.message);
                 const { user } = response;
                 res.json({
