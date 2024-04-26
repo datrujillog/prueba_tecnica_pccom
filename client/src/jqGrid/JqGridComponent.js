@@ -14,6 +14,7 @@ import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/autocomplete';
 //searchFilter
 import 'jquery-ui/ui/widgets/accordion';
+import jquery from 'jquery';
 
 
 
@@ -63,10 +64,24 @@ const JqGridComponent = () => {
                     if (id && id !== lastsel) {
                         jQuery('#rowed3').jqGrid('restoreRow', lastsel);
                         jQuery('#rowed3').jqGrid('editRow', id, true);
+                        //add
+                        jquery("#rowed3").jqGrid('editGridRow', 'new', {
+                            height: 280,
+                            closeAfterAdd: true,
+                            closeAfterEdit: true,
+                            closeOnEscape: true,
+                            savekey: [true, 13],
+                            editurl: 'http://localhost:5000/api/user/create',
+                            aftersavefunc: function () {
+                                // Después de guardar el nuevo registro, recargar la grilla para reflejar los cambios
+                                jQuery("#rowed3").trigger("reloadGrid");
+                            }
+                        });
                         // lastsel = id;
                     }
                 },
-                editurl: 'http://localhost:5000/api/user/update',   
+                // editurl: 'http://localhost:5000/api/user/update',   
+                editurl: 'http://localhost:5000/api/user/create',   
                 // addturl: 'http://localhost:5000/api/user/create',  
                 caption: "Prueba Tecnica en PCCOM " 
             });
@@ -74,15 +89,31 @@ const JqGridComponent = () => {
         });
     }, []);
 
+    const agregarRegistro = () => {
+        jQuery("#rowed3").jqGrid('editGridRow', 'new', {
+            height: 280,
+            closeAfterAdd: true,
+            closeAfterEdit: true,
+            closeOnEscape: true,
+            savekey: [true, 13],
+            editurl: 'http://localhost:5000/api/user/create',
+            aftersavefunc: function () {
+                // Después de guardar el nuevo registro, recargar la grilla para reflejar los cambios
+                jQuery("#rowed3").trigger("reloadGrid");
+            }
+        });
+    }
+
     return (
         <div>
             <h2>Ejemplo de jqGrid en React</h2>
             <table id="rowed3"></table>
             <div id="prowed3"></div>
-            <button onClick={() => { 
+            {/* <button onClick={() => { 
                 // jQuery("#rowed3").jqGrid('editGridRow', "new", {height:280,reloadAfterSubmit:false}); 
                 jQuery("#rowed3").jqGrid('editGridRow', 'new', {height:280,closeAfterAdd:true, closeAfterEdit:true, closeOnEscape:true, savekey: [true,13]}); 
-                }}>Agregar</button>
+                }}>Agregar</button> */}
+            <button onClick={agregarRegistro}>Agregar</button>
 
         </div>
     );

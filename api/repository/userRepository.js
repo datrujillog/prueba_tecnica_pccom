@@ -21,7 +21,7 @@ class UserRepository {
     async createUsers(data) {
 
         try {
-
+            delete data.id;
             const user = await this.#userModel.createMany({ data });
 
             if (!user) throw new Error("User not created")
