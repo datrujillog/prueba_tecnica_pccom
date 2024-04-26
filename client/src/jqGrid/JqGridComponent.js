@@ -66,7 +66,7 @@ const JqGridComponent = () => {
                         // lastsel = id;
                     }
                 },
-                editurl: 'http://localhost:5000/api/user/update',  
+                editurl: 'http://localhost:5000/api/user/update',   
                 // addturl: 'http://localhost:5000/api/user/create',  
                 caption: "Prueba Tecnica en PCCOM " 
             });
