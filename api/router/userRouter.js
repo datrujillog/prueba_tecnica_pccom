@@ -74,19 +74,28 @@ class UserRouter {
                 const oper = req.body.oper;
 
                 if (oper == 'add') {
-                    const response = await userService.createUser(body);
-                    // if (!response.success) throw new Error(response.error.message);  
+                    try {
+                        const response = await userService.createUser(body);
+
+                        res.send(response)
+                    } catch (error) {
+                        errorResponse(res, error.message);
+
+                    }
+
+                } else {
+                    const response = await userService.updateUser(userId, body);
+                    if (!response.success) throw new Error(response.error.message);
                     const { user } = response;
-                    res.json(response)
+                    res.json({
+                        success: true,
+                        user
+                    });
                 }
 
-                const response = await userService.updateUser(userId, body);
-                if (!response.success) throw new Error(response.error.message);
-                const { user } = response;
-                res.json({
-                    success: true,
-                    user
-                });
+
+
+
 
             } catch (error) {
                 errorResponse(res, error.message);
