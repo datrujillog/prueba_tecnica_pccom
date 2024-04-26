@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 // importar css
-// import './JqGridComponent.css'
+import './JqGridComponent.css'
 import 'jqgrid/css/ui.jqgrid.css';
 import 'jquery-ui/themes/base/all.css';
 import 'jquery-ui/ui/widgets/datepicker';
@@ -32,9 +32,9 @@ const JqGridComponent = () => {
                 colNames: ['id', 'Name', 'LastName', 'Email'],
                 colModel: [
                     { name: 'id', index: 'id', width: 50, editable: true, hidden: true, key: true, editrules: { edithidden: false } },
-                    { name: 'Name', index: 'Name', width: 400, editable: true },
+                    { name: 'Name', index: 'Name', width: 300, editable: true },
                     { name: 'LastName', index: 'LastName', width: 100, editable: true },
-                    { name: 'Email', index: 'Email', width: 150, sortable: false, editable: true }
+                    { name: 'Email', index: 'Email', width: 200, sortable: false, editable: true }
                 ],
                 rowNum: 10,               // Número de filas por página
                 rowList: [10, 20, 30],    // Opciones de número de filas por página
@@ -55,6 +55,10 @@ const JqGridComponent = () => {
 
         });
     }, []);
+
+    const reloadGrid = () => {
+        jQuery("#rowed3").trigger('reloadGrid'); // Esto recarga la tabla
+    };
 
 
     const addNewRecord = () => {
@@ -93,20 +97,25 @@ const JqGridComponent = () => {
 
     // crear boton para eliminar registro
     const deleteRecord = () => {
-        // Obtener el ID del registro seleccionado
         const selectedRowId = jQuery("#rowed3").jqGrid('getGridParam', 'selrow');
-        const rowData = jQuery("#rowed3").jqGrid('getRowData', selectedRowId);
-        // Enviar una solicitud DELETE al servidor para eliminar el registro
+        if (!selectedRowId) {
+            alert('Seleccione un registro para eliminar');
+            return;
+        }
+
+        if (!window.confirm('¿Está seguro de que desea eliminar el registro seleccionado?')) return;
+
+        const rowData = jQuery("#rowed3").jqGrid('getRowData', selectedRowId)
         axios.delete(`http://localhost:5000/api/user/delete/${rowData.id}`)
             .then(response => {
-                // Manejar la respuesta si es necesario
                 console.log('Registro eliminado exitosamente');
+                alert('Registro eliminado exitosamente');
             })
             .catch(error => {
-                // Manejar cualquier error de la solicitud
                 console.error('Error:', error);
             });
-    }
+    };
+
 
 
 
@@ -116,9 +125,11 @@ const JqGridComponent = () => {
             <table id="rowed3"></table>
             <div id="prowed3"></div>
             <br />
-            <button onClick={addNewRecord}>Agregar</button>
+            <button className='btn' onClick={addNewRecord}>Agregar</button>
 
-            <button onClick={deleteRecord}>Eliminar</button>
+            <button className='btn' onClick={deleteRecord}>Eliminar</button>
+            <button className="btn" onClick={reloadGrid}>Recargar</button>
+
 
 
         </div>

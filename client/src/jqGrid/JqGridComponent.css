@@ -1,30 +1,83 @@
 /* Estilos para la tabla */
+* {
+  box-sizing: border-box;
+}
 .ui-jqgrid {
-    width: 100%;
-  }
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ui-jqgrid .ui-jqgrid-hdiv {
+  background-color: #ec2424; /* Color de fondo del encabezado */
+} 
+
+/* Estilos para las filas alternas */
+.ui-jqgrid tr.jqgrow:nth-child(even) { 
+  background-color: #e7660f; 
+}
+
+/* Estilos para las filas impares */
+ .ui-jqgrid tr.jqgrow:nth-child(odd) {
+  background-color: #f01919; 
+} 
+
+.ui-jqgrid tr.jqgrow td {
+  padding: 5px; 
+  background-color: #f7f4f4; /* Color de fondo de las celdas */
+ }
+
+/* Estilos para el paginador */
+.ui-jqgrid .ui-pg-table {
+  /* background-color: #ddecf7;  */
+  cursor: pointer; /* Cambio de cursor al pasar el ratón */
   
-  /* Estilos para las celdas de encabezado */
-  .ui-jqgrid .ui-jqgrid-hdiv {
-    background-color: #f2f2f2; /* Color de fondo del encabezado */
-  }
-  
-  /* Estilos para las filas alternas */
-  .ui-jqgrid tr.jqgrow:nth-child(even) {
-    background-color: #f9f9f9; /* Color de fondo de las filas alternas */
-  }
-  
-  /* Estilos para las filas impares */
-  .ui-jqgrid tr.jqgrow:nth-child(odd) {
-    background-color: #ffffff; /* Color de fondo de las filas impares */
-  }
-  
-  /* Estilos para las celdas */
-  .ui-jqgrid tr.jqgrow td {
-    padding: 5px; /* Espaciado interno de las celdas */
-  }
-  
-  /* Estilos para el paginador */
-  .ui-jqgrid .ui-pg-table {
-    background-color: #f2f2f2; /* Color de fondo del paginador */
-  }
-  
+ } 
+
+.center {
+  text-align: center;
+  margin: auto;
+}
+
+.btn {
+  background-color: #4CAF50; /* Color de fondo */
+  border: none; /* Sin borde */
+  color: white; /* Color de texto */
+  padding: 15px 32px; /* Espaciado interno */
+  text-align: center; /* Alineación del texto */
+  text-decoration: none; /* Sin decoración de texto */
+  display: inline-block;
+  font-size: 16px; /* Tamaño de fuente */
+  margin: 4px 2px; /* Margen */
+  cursor: pointer; /* Cursor */
+  border-radius: 8px; /* Borde redondeado */
+  transition-duration: 0.4s; /* Duración de la transición */
+}
+
+.btn:hover {
+  background-color: #45a049; /* Cambio de color al pasar el ratón */
+}
+
+/* Estilo para las celdas de Name, LastName y Email */
+.ui-jqgrid tr.jqgrow td[aria-describedby="rowed3_Name"],
+.ui-jqgrid tr.jqgrow td[aria-describedby="rowed3_LastName"],
+.ui-jqgrid tr.jqgrow td[aria-describedby="rowed3_Email"] {
+    background-color: #ffffff; /* Color de fondo de las celdas */
+    color: #333; /* Color del texto */
+    font-weight: bold; /* Negrita */
+    cursor: pointer;
+}
+
+/* Estilos para las celdas de encabezado con los nombres de las columnas */
+.ui-jqgrid .ui-jqgrid-hdiv th.ui-th-column[title="Name"],
+.ui-jqgrid .ui-jqgrid-hdiv th.ui-th-column[title="LastName"],
+.ui-jqgrid .ui-jqgrid-hdiv th.ui-th-column[title="Email"] {
+    background-color: #72d37f; /* Color de fondo */
+    color: #e21f1f; /* Color del texto */
+    font-weight: bold; /* Negrita */
+}
+
+.ui-jqgrid-sortable {
+  cursor: pointer; /* Cambio de cursor al pasar el ratón */
+  /* background-color: #ddecf7; */
+  height: 100%;
+}
