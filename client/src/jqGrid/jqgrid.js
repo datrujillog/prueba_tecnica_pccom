@@ -22,12 +22,13 @@ const Jqgrid = () => {
     jQuery(document).ready(function () {
       var lastsel;
       jQuery("#rowed3").jqGrid({
-        url: 'http://localhost:5000/api/user/get/',
+        // url: 'http://localhost:5000/api/user/get/',
+        url: 'https://w2lcfkj3-5000.use2.devtunnels.ms/api/user/get/',
         datatype: "json",
         colNames: ['id', 'Name', 'LastName', 'Email'],
         colModel: [
           { name: 'id', index: 'id', width: 50, editable: true, hidden: true, key: true, editrules: { edithidden: false } },
-          { name: 'Name', index: 'Name', width: 400, editable: true },
+          { name: 'Name', index: 'Name', width: 280, editable: true },
           { name: 'LastName', index: 'LastName', width: 100, editable: true },
           { name: 'Email', index: 'Email', width: 250, sortable: false, editable: true }
         ],
@@ -45,7 +46,8 @@ const Jqgrid = () => {
             lastsel = id;
           }
         },
-        editurl: 'http://localhost:5000/api/user/update',
+        editurl: 'https://w2lcfkj3-5000.use2.devtunnels.ms/api/user/update',
+        // editurl: 'http://localhost:5000/api/user/update',
         caption: "Prueba Tecnica en PCCOM "
       });
       //Reload Grid
@@ -62,7 +64,7 @@ const Jqgrid = () => {
 
   const addNewRecord = () => {
     const rowData = jQuery("#rowed3").jqGrid('editGridRow', 'new', {
-      editurl: 'http://localhost:5000/api/user/create',
+      editurl: 'https://w2lcfkj3-5000.use2.devtunnels.ms/api/user/create',
       height: 280,
       reloadAfterSubmit: false,
       closeAfterAdd: true,
@@ -76,7 +78,7 @@ const Jqgrid = () => {
       saveData: 'Data has been changed! Save changes?'
     });
 
-    axios.post('http://localhost:5000/api/user/create', rowData, {
+    axios.post('https://w2lcfkj3-5000.use2.devtunnels.ms/api/user/create', rowData, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -99,7 +101,7 @@ const Jqgrid = () => {
     if(!window.confirm('¿Está seguro de que desea eliminar el registro seleccionado?')) return;
     
     const rowData = jQuery("#rowed3").jqGrid('getRowData', selectedRowId)
-    axios.delete(`http://localhost:5000/api/user/delete/${rowData.id}`)
+    axios.delete(`https://w2lcfkj3-5000.use2.devtunnels.ms/api/user/delete/${rowData.id}`)
     .then(response => {
       console.log('Registro eliminado exitosamente');
       alert('Registro eliminado exitosamente');

@@ -17,8 +17,8 @@ import 'jquery-ui/ui/widgets/autocomplete';
 import 'jquery-ui/ui/widgets/accordion';
 import jquery from 'jquery';
 
-
-
+// 3.84.247.50
+// http://3.84.247.50/
 
 const JqGridComponent = () => {
 
@@ -27,7 +27,7 @@ const JqGridComponent = () => {
         jQuery(document).ready(function () {
             var lastsel;
             jQuery("#rowed3").jqGrid({
-                url: 'http://localhost:5000/api/user/get/',
+                url: 'http://3.84.247.50:5000/api/user/get/',
                 datatype: "json",
                 colNames: ['id', 'Name', 'LastName', 'Email'],
                 colModel: [
@@ -49,7 +49,7 @@ const JqGridComponent = () => {
                         lastsel = id;
                     }
                 },
-                editurl: 'http://localhost:5000/api/user/update',
+                editurl: 'http://3.84.247.50:5000/api/user/update',
                 caption: "Prueba Tecnica en PCCOM "
             });
 
@@ -64,7 +64,7 @@ const JqGridComponent = () => {
     const addNewRecord = () => {
         // Obtener los datos del nuevo registro
         const rowData = jQuery("#rowed3").jqGrid('editGridRow', 'new', {
-            editurl: 'http://localhost:5000/api/user/create',
+            editurl: 'http://3.84.247.50:5000/api/user/create',
             height: 280,
             reloadAfterSubmit: false,
             closeAfterAdd: true,
@@ -78,7 +78,7 @@ const JqGridComponent = () => {
             saveData: 'Data has been changed! Save changes?'
         });
 
-        axios.post('http://localhost:5000/api/user/create', rowData, {
+        axios.post('http://3.84.247.50:5000/api/user/create', rowData, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -106,7 +106,7 @@ const JqGridComponent = () => {
         if (!window.confirm('¿Está seguro de que desea eliminar el registro seleccionado?')) return;
 
         const rowData = jQuery("#rowed3").jqGrid('getRowData', selectedRowId)
-        axios.delete(`http://localhost:5000/api/user/delete/${rowData.id}`)
+        axios.delete(`http://3.84.247.50:5000/api/user/delete/${rowData.id}`)
             .then(response => {
                 console.log('Registro eliminado exitosamente');
                 alert('Registro eliminado exitosamente');
