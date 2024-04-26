@@ -16,25 +16,15 @@ class UserService {
 
     async createUser(data) {
 
-            const parseBody = await parseDatos(data);
-            const user = await userRepository.createUsers(parseBody);
-            return user;
+        const parseBody = await parseDatos(data);
+        const user = await userRepository.createUsers(parseBody);
+        return user;
     }
 
     async getAllUsers() {
 
-        try {
-
-            const users = await userRepository.getAllUsers();
-
-            return users
-
-        } catch (error) {
-            return {
-                success: false,
-                error
-            };
-        }
+        const users = await userRepository.getAllUsers();
+        return users
     }
 
     async getUserById(id) {

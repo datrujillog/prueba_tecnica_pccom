@@ -42,19 +42,12 @@ class UserRepository {
         try {
 
             const users = await this.#userModel.findMany();
-
-            delete users[0].id;
-
-            //hacer un map para eliminar el id de cada usuario
-            // users.map(user => { delete user.id });
+            if (users.length === 0) throw new NotFound("Users not found");
 
             return users;
 
         } catch (error) {
-            return {
-                success: false,
-                error
-            };
+            throw new BadRequest(error.message);
         }
     }
 
