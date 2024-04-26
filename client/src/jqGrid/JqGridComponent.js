@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 // importar css
 // import './JqGridComponent.css'
 import 'jqgrid/css/ui.jqgrid.css';
@@ -64,45 +65,79 @@ const JqGridComponent = () => {
                     if (id && id !== lastsel) {
                         jQuery('#rowed3').jqGrid('restoreRow', lastsel);
                         jQuery('#rowed3').jqGrid('editRow', id, true);
-                        //add
-                        jquery("#rowed3").jqGrid('editGridRow', 'new', {
-                            height: 280,
-                            closeAfterAdd: true,
-                            closeAfterEdit: true,
-                            closeOnEscape: true,
-                            savekey: [true, 13],
-                            editurl: 'http://localhost:5000/api/user/create',
-                            aftersavefunc: function () {
-                                // Después de guardar el nuevo registro, recargar la grilla para reflejar los cambios
-                                jQuery("#rowed3").trigger("reloadGrid");
-                            }
-                        });
-                        // lastsel = id;
+                        lastsel = id;
                     }
                 },
-                // editurl: 'http://localhost:5000/api/user/update',   
-                editurl: 'http://localhost:5000/api/user/create',   
-                // addturl: 'http://localhost:5000/api/user/create',  
+                editurl: 'http://localhost:5000/api/user/update',   
+                // editurl: 'http://localhost:5000/api/user/create',   
+                // //eliminar
+                // elimturl: 'http://localhost:5000/api/user/delete',  
                 caption: "Prueba Tecnica en PCCOM " 
             });
             // jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true });
+
+
+
+            // Agregar botón de crear registra fuera del jqGrid
+            
+           
+            
+
+
+
+
+
         });
+
+
+
+
+
+
+
+
+
     }, []);
 
-    const agregarRegistro = () => {
-        jQuery("#rowed3").jqGrid('editGridRow', 'new', {
+
+    const addNewRecord = () => {
+        // Obtener los datos del nuevo registro
+        const rowData = jQuery("#rowed3").jqGrid('editGridRow', 'new', {
+            editurl: 'http://localhost:5000/api/user/create',
             height: 280,
+            reloadAfterSubmit: false,
             closeAfterAdd: true,
             closeAfterEdit: true,
             closeOnEscape: true,
             savekey: [true, 13],
-            editurl: 'http://localhost:5000/api/user/create',
-            aftersavefunc: function () {
-                // Después de guardar el nuevo registro, recargar la grilla para reflejar los cambios
-                jQuery("#rowed3").trigger("reloadGrid");
-            }
+            caption: 'Agregar Registro',
+            bSubmit: 'Guardar',
+            bCancel: 'Cancelar',
+            bClose: 'Cerrar',
+            saveData: 'Data has been changed! Save changes?'
         });
-    }
+    
+        // Verificar la operación
+    
+        // Enviar los datos al servidor solo si la operación es "add" o "edit"
+       
+            axios.post('http://localhost:5000/api/user/create', rowData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                // Manejar la respuesta si es necesario
+                console.log('Registro agregado exitosamente');
+            })
+            .catch(error => {
+                // Manejar cualquier error de la solicitud
+                console.error('Error:', error);
+            });
+        
+    };
+    
+    
 
     return (
         <div>
@@ -110,10 +145,11 @@ const JqGridComponent = () => {
             <table id="rowed3"></table>
             <div id="prowed3"></div>
             {/* <button onClick={() => { 
-                // jQuery("#rowed3").jqGrid('editGridRow', "new", {height:280,reloadAfterSubmit:false}); 
+                 jQuery("#rowed3").jqGrid('editGridRow', "new", {height:280,reloadAfterSubmit:false}); 
                 jQuery("#rowed3").jqGrid('editGridRow', 'new', {height:280,closeAfterAdd:true, closeAfterEdit:true, closeOnEscape:true, savekey: [true,13]}); 
                 }}>Agregar</button> */}
-            <button onClick={agregarRegistro}>Agregar</button>
+            <button  onClick={addNewRecord}>Agregar</button>
+
 
         </div>
     );
@@ -123,3 +159,52 @@ export default JqGridComponent;
 
 
                 // { name: 'id', index: 'id', width: 50, editable: true, hidden: true, key: true, editrules: { edithidden: false } },
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 // Agregar botón de actualización fuera del jqGrid
+    //     jQuery("#rowed3").jqGrid('navGrid', '#prowed3', {
+    //         edit: false,
+    //         add: false,
+    //         del: false
+    //     }, {}, {}, {}, {
+    //         // Custom update function
+    //         onClickButton: function () {
+    //             var selectedRowId = jQuery("#rowed3").jqGrid('getGridParam', 'selrow');
+    //             var rowData = jQuery("#rowed3").jqGrid('getRowData', selectedRowId);
+                
+    //             // Aquí debes enviar la solicitud PUT al servidor para actualizar el registro
+    //             jQuery.ajax({
+    //                 mtype: "PUT",
+    //                 url: "http://localhost:5000/api/user/update",
+    //                 data: JSON.stringify(rowData), // Envía los datos del registro seleccionado al servidor
+    //                 contentType: "application/json; charset=utf-8",
+    //                 dataType: "json",
+    //                 success: function (response) {
+    //                     // Manejar la respuesta del servidor si es necesario
+    //                     console.log("Registro actualizado exitosamente");
+    //                 },
+    //                 error: function (xhr, status, error) {
+    //                     // Manejar cualquier error de la solicitud
+    //                     console.error("Error al actualizar el registro:", error);
+    //                 }
+    //             });
+    //         },
+    //         position: "right",
+    //         // Agregar botón de actualización
+    //         caption: "", // Caption vacío para que no aparezca ningún texto en el botón
+    //         buttonicon: "ui-icon-refresh", // Ícono del botón (puedes cambiarlo por otro si lo deseas)
+    //         title: "Actualizar Registro", // Título del botón
+    //         id: "customUpdateButton" // ID único del botón para referenciarlo si es necesario
+    //     });
+    // });

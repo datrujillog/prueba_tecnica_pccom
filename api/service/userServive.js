@@ -66,7 +66,7 @@ class UserService {
     async updateUser(id, data) {
 
         try {
-
+            delete data.id;
             const user = await userRepository.updateUser(id, data);
 
             return {

@@ -20,9 +20,10 @@ class UserRouter {
 
             try {
 
-                const body = req.body;
-                const response = await userService.createUser(body);
-                // if (!response.success) throw new Error(response.error.message);
+                const body = req.body;   
+                const oper = req.body.oper;
+                const response = await userService.createUser(body); 
+                // if (!response.success) throw new Error(response.error.message);  
                 const { user } = response;
                 res.json(response)
 
@@ -66,12 +67,21 @@ class UserRouter {
             });
 
         this.router.post("/update", async (req, res) => {
-            try {
+            try { 
 
                 // const { id } = req.params;
-                const body = req.body;
+                const body = req.body; 
                 const userId = req.body.id;
-                const response = await userService.updateUser(userId, body);
+                const oper = req.body.oper;
+
+                if (oper == 'add') {
+                    const response = await userService.createUser(body); 
+                    if (!response.success) throw new Error(response.error.message);  
+                    const { user } = response;
+                    res.json(response)
+                }
+
+                const response = await userService.updateUser(userId, body);     
                 if (!response.success) throw new Error(response.error.message);
                 const { user } = response;
                 res.json({
@@ -84,11 +94,13 @@ class UserRouter {
             }
         });
 
-        this.router.delete("/delete/:id", async (req, res) => {
+        this.router.post("/delete", async (req, res) => {
             try {
 
                 const { id } = req.params;
-                const response = await userService.deleteUser(id);
+                const userId = req.body.id;
+
+                const response = await userService.deleteUser(userId);
                 if (!response) throw new Error(response.error.message);
                 res.json({
                     success: true
