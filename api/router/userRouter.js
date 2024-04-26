@@ -76,7 +76,7 @@ class UserRouter {
 
                 if (oper == 'add') {
                     const response = await userService.createUser(body); 
-                    if (!response.success) throw new Error(response.error.message);  
+                    // if (!response.success) throw new Error(response.error.message);  
                     const { user } = response;
                     res.json(response)
                 }
@@ -94,13 +94,13 @@ class UserRouter {
             }
         });
 
-        this.router.post("/delete", async (req, res) => {
+        this.router.delete("/delete/:id", async (req, res) => {
             try {
 
                 const { id } = req.params;
                 const userId = req.body.id;
 
-                const response = await userService.deleteUser(userId);
+                const response = await userService.deleteUser(id);
                 if (!response) throw new Error(response.error.message);
                 res.json({
                     success: true

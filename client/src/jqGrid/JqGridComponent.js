@@ -74,29 +74,8 @@ const JqGridComponent = () => {
                 // elimturl: 'http://localhost:5000/api/user/delete',  
                 caption: "Prueba Tecnica en PCCOM " 
             });
-            // jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true });
-
-
-
-            // Agregar botón de crear registra fuera del jqGrid
-            
-           
-            
-
-
-
-
 
         });
-
-
-
-
-
-
-
-
-
     }, []);
 
 
@@ -136,6 +115,24 @@ const JqGridComponent = () => {
             });
         
     };
+
+
+    // crear boton para eliminar registro
+    const deleteRecord = () => {
+        // Obtener el ID del registro seleccionado
+        const selectedRowId = jQuery("#rowed3").jqGrid('getGridParam', 'selrow');
+        const rowData = jQuery("#rowed3").jqGrid('getRowData', selectedRowId);
+        // Enviar una solicitud DELETE al servidor para eliminar el registro
+        axios.delete(`http://localhost:5000/api/user/delete/${rowData.id}`)
+            .then(response => {
+                // Manejar la respuesta si es necesario
+                console.log('Registro eliminado exitosamente');
+            })
+            .catch(error => {
+                // Manejar cualquier error de la solicitud
+                console.error('Error:', error);
+            });
+    }
     
     
 
@@ -149,6 +146,8 @@ const JqGridComponent = () => {
                 jQuery("#rowed3").jqGrid('editGridRow', 'new', {height:280,closeAfterAdd:true, closeAfterEdit:true, closeOnEscape:true, savekey: [true,13]}); 
                 }}>Agregar</button> */}
             <button  onClick={addNewRecord}>Agregar</button>
+
+            <button onClick={deleteRecord}>Eliminar</button>
 
 
         </div>
