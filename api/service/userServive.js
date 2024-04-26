@@ -1,3 +1,4 @@
+const { BadRequest } = require("../middleware/error");
 const userRepository = require("../repository/userRepository");
 
 class UserService {
@@ -13,19 +14,18 @@ class UserService {
     }
 
     async createUser(data) {
+
         try {
-            // Lógica para crear un usuario
 
             const user = await userRepository.createUsers(data);
 
             return user;
 
         } catch (error) {
-            return {
-                success: false,
-                error
-            };
+            throw new BadRequest(error.message)
         }
+
+
     }
 
     async getAllUsers() {

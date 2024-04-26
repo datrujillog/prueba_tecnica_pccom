@@ -1,6 +1,8 @@
 const express = require("express");
 
 const userService = require("../service/userServive");
+const { BadRequest } = require("../middleware/error");
+const errorResponse = require("../middleware/response");
 
 class UserRouter {
     static #instance;
@@ -20,15 +22,15 @@ class UserRouter {
 
             try {
 
-                const body = req.body;   
+                const body = req.body;
                 const oper = req.body.oper;
-                const response = await userService.createUser(body); 
-                // if (!response.success) throw new Error(response.error.message);  
-                const { user } = response;
+                const response = await userService.createUser(body);
+
                 res.json(response)
 
             } catch (error) {
-                throw error
+                // throw new BadRequest(error.message)
+                errorResponse(res, error);
 
             }
 
@@ -49,39 +51,39 @@ class UserRouter {
         });
 
         this.router.get("/getOne/:id", async (req, res) => {
-                
-                try {
-    
-                    const { id } = req.params;
-                    const response = await userService.getUserById(id);
-                    if (!response.success) throw new Error(response.error.message);
-                    const { user } = response;
-                    res.json({
-                        success: true,
-                        user
-                    });
-    
-                } catch (error) {
-                    throw error
-                }
-            });
+
+            try {
+
+                const { id } = req.params;
+                const response = await userService.getUserById(id);
+                if (!response.success) throw new Error(response.error.message);
+                const { user } = response;
+                res.json({
+                    success: true,
+                    user
+                });
+
+            } catch (error) {
+                throw error
+            }
+        });
 
         this.router.post("/update", async (req, res) => {
-            try { 
+            try {
 
                 // const { id } = req.params;
-                const body = req.body; 
+                const body = req.body;
                 const userId = req.body.id;
                 const oper = req.body.oper;
 
                 if (oper == 'add') {
-                    const response = await userService.createUser(body); 
+                    const response = await userService.createUser(body);
                     // if (!response.success) throw new Error(response.error.message);  
                     const { user } = response;
                     res.json(response)
                 }
 
-                const response = await userService.updateUser(userId, body);     
+                const response = await userService.updateUser(userId, body);
                 if (!response.success) throw new Error(response.error.message);
                 const { user } = response;
                 res.json({

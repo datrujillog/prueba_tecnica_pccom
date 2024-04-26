@@ -1,5 +1,5 @@
 const {PrismaClient} = require('@prisma/client')
-
+const { BadRequest,NotFound } = require('../middleware/error');
 
 class UserRepository {
     static #instance; // Propiedad estática para almacenar la única instancia
@@ -21,19 +21,20 @@ class UserRepository {
     async createUsers(data) {
 
         try {
+            if(!data.Email) throw new BadRequest("Email is required");
             delete data.id;
             const user = await this.#userModel.createMany({ data });
 
-            if (!user) throw new Error("User not created")
+            if (user.count == 0) throw new NotFound("User not created")
 
             return user;
 
         } catch (error) {
             if (error.code === "P2002") {
-                throw new Error("Email already exists");
+                throw new BadRequest("Email already exists");
             }
             console.log(error);
-            throw new Error(error.message);
+            throw new BadRequest(error.message);
         }
     }
 
