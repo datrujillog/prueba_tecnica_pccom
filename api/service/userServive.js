@@ -29,40 +29,22 @@ class UserService {
 
     async getUserById(id) {
 
-        try {
-
-            const user = await userRepository.getUserById(id);
-
-            return {
-                success: true,
-                user
-            };
-
-        } catch (error) {
-            return {
-                success: false,
-                error
-            };
-        }
+        const user = await userRepository.getUserById(id);
+        return {
+            success: true,
+            user
+        };
     }
 
     async updateUser(id, data) {
 
-        try {
-            delete data.id;
-            const user = await userRepository.updateUser(id, data);
+        delete data.id;
+        const user = await userRepository.updateUser(id, data);
 
-            return {
-                success: true,
-                user
-            };
-
-        } catch (error) {
-            return {
-                success: false,
-                error
-            };
-        }
+        return {
+            success: true,
+            user
+        };
     }
 
     async deleteUser(id) {

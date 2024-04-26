@@ -69,7 +69,6 @@ class UserRouter {
         this.router.post("/update", async (req, res) => {
             try {
 
-                // const { id } = req.params;
                 const body = req.body;
                 const userId = req.body.id;
                 const oper = req.body.oper;

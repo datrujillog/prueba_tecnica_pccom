@@ -87,7 +87,7 @@ class UserRepository {
                 data
             });
 
-            if (!user) throw new Error("User not found");
+            if (!user) throw new NotFound("User not found");
 
             return {
                 success: true,
@@ -95,10 +95,7 @@ class UserRepository {
             };
 
         } catch (error) {
-            return {
-                success: false,
-                error
-            };
+            throw new BadRequest(error.message);
         }
     }
 
