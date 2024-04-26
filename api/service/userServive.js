@@ -1,4 +1,4 @@
-const {parseDatos,parseDatosUpdate} = require("../helpers/normalizeData");
+const { parseDatos, parseDatosUpdate } = require("../helpers/normalizeData");
 const { BadRequest } = require("../middleware/error");
 const userRepository = require("../repository/userRepository");
 
@@ -28,24 +28,30 @@ class UserService {
     }
 
     async getUserById(id) {
-
         const user = await userRepository.getUserById(id);
+        if (!user) {
+            return {
+                ok: false,
+                errors: [{ message: "User not found" }]
+            };
+        }
         return {
             success: true,
             user
         };
     }
 
-    async updateUser(id, data) {
-
-        // const parseUpdate = await parseDatosUpdate(id);
-
-        delete data.id;
-        const user = await userRepository.updateUser(id, data); 
-
+    async updateUser(id, userData) {
+        const updatedUser = await userRepository.updateUser(id, userData);
+        if (!updatedUser) {
+            return {
+                ok: false,
+                errors: [{ message: "Update failed" }]
+            };
+        }
         return {
             success: true,
-            user
+            user: updatedUser
         };
     }
 

@@ -69,10 +69,7 @@ class UserRepository {
             };
 
         } catch (error) {
-            return {
-                success: false,
-                error
-            };
+            throw new BadRequest(error.message);
         }
     }
 

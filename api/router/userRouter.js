@@ -62,7 +62,7 @@ class UserRouter {
                 });
 
             } catch (error) {
-                throw error
+                errorResponse(res, error.message);
             }
         });
 
