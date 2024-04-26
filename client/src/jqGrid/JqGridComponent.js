@@ -21,34 +21,15 @@ import jquery from 'jquery';
 
 
 const JqGridComponent = () => {
-    // const [jqgridData, setjqGridData] = useState([]);
-
-    //traer los dastos del api y setearlos en el estado
-    //     useEffect(() => {
-    //         fetch('http://localhost:5000/api/user/get')
-    //             .then(response => response.json())
-    //             .then(data => {
-    //                 setjqGridData(data);
-    //             });
-    //     }, []);
-
-
-
-
-    // console.log('DATA  <>',jqgridData);
-
 
     useEffect(() => {
-        // Datos de prueba para la tabla
-
-
         // Inicializar jqGrid
         jQuery(document).ready(function () {
             var lastsel;
             jQuery("#rowed3").jqGrid({
                 url: 'http://localhost:5000/api/user/get/',
                 datatype: "json",
-                colNames: ['id','Name', 'LastName', 'Email'],
+                colNames: ['id', 'Name', 'LastName', 'Email'],
                 colModel: [
                     { name: 'id', index: 'id', width: 50, editable: true, hidden: true, key: true, editrules: { edithidden: false } },
                     { name: 'Name', index: 'Name', width: 400, editable: true },
@@ -68,11 +49,8 @@ const JqGridComponent = () => {
                         lastsel = id;
                     }
                 },
-                editurl: 'http://localhost:5000/api/user/update',   
-                // editurl: 'http://localhost:5000/api/user/create',   
-                // //eliminar
-                // elimturl: 'http://localhost:5000/api/user/delete',  
-                caption: "Prueba Tecnica en PCCOM " 
+                editurl: 'http://localhost:5000/api/user/update',
+                caption: "Prueba Tecnica en PCCOM "
             });
 
         });
@@ -95,16 +73,12 @@ const JqGridComponent = () => {
             bClose: 'Cerrar',
             saveData: 'Data has been changed! Save changes?'
         });
-    
-        // Verificar la operación
-    
-        // Enviar los datos al servidor solo si la operación es "add" o "edit"
-       
-            axios.post('http://localhost:5000/api/user/create', rowData, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+
+        axios.post('http://localhost:5000/api/user/create', rowData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => {
                 // Manejar la respuesta si es necesario
                 console.log('Registro agregado exitosamente');
@@ -113,7 +87,7 @@ const JqGridComponent = () => {
                 // Manejar cualquier error de la solicitud
                 console.error('Error:', error);
             });
-        
+
     };
 
 
@@ -133,19 +107,16 @@ const JqGridComponent = () => {
                 console.error('Error:', error);
             });
     }
-    
-    
+
+
 
     return (
         <div>
             <h2>Ejemplo de jqGrid en React</h2>
             <table id="rowed3"></table>
             <div id="prowed3"></div>
-            {/* <button onClick={() => { 
-                 jQuery("#rowed3").jqGrid('editGridRow', "new", {height:280,reloadAfterSubmit:false}); 
-                jQuery("#rowed3").jqGrid('editGridRow', 'new', {height:280,closeAfterAdd:true, closeAfterEdit:true, closeOnEscape:true, savekey: [true,13]}); 
-                }}>Agregar</button> */}
-            <button  onClick={addNewRecord}>Agregar</button>
+            <br />
+            <button onClick={addNewRecord}>Agregar</button>
 
             <button onClick={deleteRecord}>Eliminar</button>
 
@@ -156,54 +127,3 @@ const JqGridComponent = () => {
 
 export default JqGridComponent;
 
-
-                // { name: 'id', index: 'id', width: 50, editable: true, hidden: true, key: true, editrules: { edithidden: false } },
-
-
-
-
-
-
-
-
-
-
-
-
-
-                 // Agregar botón de actualización fuera del jqGrid
-    //     jQuery("#rowed3").jqGrid('navGrid', '#prowed3', {
-    //         edit: false,
-    //         add: false,
-    //         del: false
-    //     }, {}, {}, {}, {
-    //         // Custom update function
-    //         onClickButton: function () {
-    //             var selectedRowId = jQuery("#rowed3").jqGrid('getGridParam', 'selrow');
-    //             var rowData = jQuery("#rowed3").jqGrid('getRowData', selectedRowId);
-                
-    //             // Aquí debes enviar la solicitud PUT al servidor para actualizar el registro
-    //             jQuery.ajax({
-    //                 mtype: "PUT",
-    //                 url: "http://localhost:5000/api/user/update",
-    //                 data: JSON.stringify(rowData), // Envía los datos del registro seleccionado al servidor
-    //                 contentType: "application/json; charset=utf-8",
-    //                 dataType: "json",
-    //                 success: function (response) {
-    //                     // Manejar la respuesta del servidor si es necesario
-    //                     console.log("Registro actualizado exitosamente");
-    //                 },
-    //                 error: function (xhr, status, error) {
-    //                     // Manejar cualquier error de la solicitud
-    //                     console.error("Error al actualizar el registro:", error);
-    //                 }
-    //             });
-    //         },
-    //         position: "right",
-    //         // Agregar botón de actualización
-    //         caption: "", // Caption vacío para que no aparezca ningún texto en el botón
-    //         buttonicon: "ui-icon-refresh", // Ícono del botón (puedes cambiarlo por otro si lo deseas)
-    //         title: "Actualizar Registro", // Título del botón
-    //         id: "customUpdateButton" // ID único del botón para referenciarlo si es necesario
-    //     });
-    // });
