@@ -30,7 +30,7 @@ class UserRouter {
 
             } catch (error) {
                 // throw new BadRequest(error.message)
-                errorResponse(res, error);
+                errorResponse(res, error.message);
 
             }
 

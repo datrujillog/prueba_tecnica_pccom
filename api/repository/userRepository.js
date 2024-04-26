@@ -21,10 +21,9 @@ class UserRepository {
     async createUsers(data) {
 
         try {
-            if(!data.Email) throw new BadRequest("Email is required");
+    
             delete data.id;
             const user = await this.#userModel.createMany({ data });
-
             if (user.count == 0) throw new NotFound("User not created")
 
             return user;

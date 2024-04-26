@@ -1,3 +1,4 @@
+const parseDatos = require("../helpers/normalizeData");
 const { BadRequest } = require("../middleware/error");
 const userRepository = require("../repository/userRepository");
 
@@ -15,17 +16,9 @@ class UserService {
 
     async createUser(data) {
 
-        try {
-
-            const user = await userRepository.createUsers(data);
-
+            const parseBody = await parseDatos(data);
+            const user = await userRepository.createUsers(parseBody);
             return user;
-
-        } catch (error) {
-            throw new BadRequest(error.message)
-        }
-
-
     }
 
     async getAllUsers() {
