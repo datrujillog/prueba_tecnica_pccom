@@ -1,4 +1,6 @@
 const express = require("express");
+const { PrismaClient } = require('@prisma/client')
+const prisma = new PrismaClient();
 
 const userService = require("../service/userServive");
 const { BadRequest } = require("../middleware/error");
@@ -112,9 +114,29 @@ class UserRouter {
             }
         });
 
+        //hacer paginacion
+        this.router.get("/getPaginate", async (req, res) => {
+
+            try {
+
+                const pageNumber = parseInt(req.query.pageNumber) || 1;
+                const take = parseInt(req.query.take) || 5;
+
+                const response = await userService.getPaginatedUsers(pageNumber, take);
+                res.json(response);
+
+
+            } catch (error) {
+                errorResponse(res, error.message);
+            }
+        });
+
+
+
 
         // Puedes agregar más rutas aquí si es necesario
     }
+
     getRouter() {
         return this.router;
     }

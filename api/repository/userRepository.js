@@ -1,5 +1,5 @@
-const {PrismaClient} = require('@prisma/client')
-const { BadRequest,NotFound } = require('../middleware/error');
+const { PrismaClient } = require('@prisma/client')
+const { BadRequest, NotFound } = require('../middleware/error');
 
 class UserRepository {
     static #instance; // Propiedad estática para almacenar la única instancia
@@ -21,7 +21,7 @@ class UserRepository {
     async createUsers(data) {
 
         try {
-    
+
             delete data.id;
             const user = await this.#userModel.createMany({ data });
             if (user.count == 0) throw new NotFound("User not created")
@@ -51,6 +51,9 @@ class UserRepository {
         }
     }
 
+
+
+
     async getUserById(id) {
 
         try {
@@ -76,7 +79,7 @@ class UserRepository {
     async updateUser(id, data) {
 
         try {
-            if(!id) throw new BadRequest("Id is required");
+            if (!id) throw new BadRequest("Id is required");
 
             const user = await this.#userModel.update({
                 where: {
@@ -116,7 +119,43 @@ class UserRepository {
         }
     }
 
+    async getPaginatedUsers(pageNumber, take) {
+        try {
+            const users = await this.#userModel.findMany({
+                skip: (pageNumber - 1) * take, // Calcular el índice de inicio para la paginación
+                take
+            });
+            // Verificar si hay más usuarios disponibles
+            const totalUsersCount = await this.#userModel.count(); // Obtener el total de usuarios
+            const hasMore = (pageNumber * take) < totalUsersCount;
+            return { users, hasMore };
+            
+        } catch (error) {
+            throw new BadRequest(error.message);
+        }
+    }
+    
+    
+    
+    
 }
-
 module.exports = new UserRepository();
 
+// async getAllUsers(page, pageSize) {
+//     try {
+//         // Calcula el índice de inicio para la paginación
+//         const startIndex = (page - 1) * pageSize;
+//         // Obtén los usuarios para la página actual
+//         const users = await this.#userModel.findMany({
+//             skip: startIndex,
+//             take: pageSize,
+//             orderBy: { id: 'asc' }
+//         });
+//         // Verifica si hay más usuarios disponibles
+//         const totalUsersCount = await this.#userModel.count(); // Obtén el total de usuarios
+//         const hasMore = startIndex + users.length < totalUsersCount;
+//         return { users, hasMore };
+//     } catch (error) {
+//         throw new BadRequest(error.message);
+//     }
+// }
