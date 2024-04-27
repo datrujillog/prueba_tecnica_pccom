@@ -119,12 +119,12 @@ class UserRouter {
 
             try {
 
-                const pageNumber = parseInt(req.query.pageNumber) || 1;
+                const pageNumber =  parseInt(req.query.pageNumber) || 1;
                 const take = parseInt(req.query.take) || 5;
 
                 const response = await userService.getPaginatedUsers(pageNumber, take);
                 const { users, hasMore } = response;
-                res.json(response);
+                res.json({users, hasMore});
 
 
             } catch (error) {

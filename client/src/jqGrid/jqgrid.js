@@ -26,7 +26,8 @@ const Jqgrid = () => {
     jQuery(document).ready(function () {
       var lastsel;
       jQuery("#rowed3").jqGrid({
-        url: 'http://localhost:5000/api/user/get/',
+        url: `http://localhost:5000/api/user/get`,
+        // url: 'http://localhost:5000/api/user/get/',
         datatype: "json",
         colNames: ['id', 'Name', 'LastName', 'Email'],
         colModel: [
