@@ -128,7 +128,7 @@ class UserRepository {
             // Verificar si hay más usuarios disponibles
             const totalUsersCount = await this.#userModel.count(); // Obtener el total de usuarios
             const hasMore = (pageNumber * take) < totalUsersCount;
-            return {users, hasMore};
+            return {users, hasMore }
             
         } catch (error) {
             throw new BadRequest(error.message);
