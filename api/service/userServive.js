@@ -80,8 +80,8 @@ class UserService {
     }
 
     async getPaginatedUsers(pageNumber, take) {
-            const users = await userRepository.getPaginatedUsers(pageNumber, take);
-            return users;        
+            const response = await userRepository.getPaginatedUsers(pageNumber, take);
+            return response;        
     }
 
 

@@ -123,6 +123,7 @@ class UserRouter {
                 const take = parseInt(req.query.take) || 5;
 
                 const response = await userService.getPaginatedUsers(pageNumber, take);
+                const { users, hasMore } = response;
                 res.json(response);
 
 
