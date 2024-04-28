@@ -8,7 +8,7 @@ const router = require('./router/index');
 const app = express();
 
 // redirecion ala carpeta client y el index.html
-app.use(express.static(__dirname + '/client'));
+// app.use(express.static(__dirname + '/client'));
 
 //middlewares
 app.use(morgan('dev'));
@@ -33,9 +33,9 @@ app.use((req, res, next) => {
 });
 
 // redirecion 
-app.get('*', (req, res) => {
-    res.sendFile(__dirname + '/client/index.html');
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(__dirname + '/client/index.html');
+// });
 
 
 
