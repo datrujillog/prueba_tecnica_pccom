@@ -56,7 +56,35 @@ const Jqgrid = () => {
       });
       //Reload Grid
       jQuery("#rowed3").trigger('reloadGrid'); 
+
+      //add
+      // jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true });
+
+      //delete
+      // jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true, search: true }, {}, {}, {}, { multipleSearch: true });
+
+      //boton para eliminar registro
+      jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true, search: true }, {}, {}, {}, { multipleSearch: true, reloadAfterSubmit: false,
+        closeAfterAdd: true,
+        closeAfterEdit: true,
+        closeOnEscape: true,
+        savekey: [true, 13],
+        caption: 'Agregar Registro',
+        bSubmit: 'Guardar',
+        bCancel: 'Cancelar',
+        bClose: 'Cerrar',});
+// 
+      // jQuery("#rowed3").jqGrid('getGridParam', 'selrow', { edit: true, add: true, del: true, search: true }, {}, {}, {}, { multipleSearch: true, reloadAfterSubmit: false,
+      //   closeAfterAdd: true,
+      //   closeAfterEdit: true,
+      //   closeOnEscape: true,
+      //   savekey: [true, 13],
+      //   caption: 'Agregar Registro',
+      //   bSubmit: 'Guardar',
+      //   bCancel: 'Cancelar',
+      //   bClose: 'Cerrar',});
       
+      // jQuery("#rowed3").jqGrid('getGridParam', 'selrow');
      
 
     });
@@ -99,6 +127,9 @@ const Jqgrid = () => {
     const selectedRowId = jQuery("#rowed3").jqGrid('getGridParam', 'selrow');
     if (!selectedRowId) {
       alert('Seleccione un registro para eliminar');
+      //actualizar la tabla despues de eliminar
+      reloadGrid();
+      
       return;
     }
 
