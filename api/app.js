@@ -7,6 +7,9 @@ const router = require('./router/index');
 
 const app = express();
 
+// redirecion ala carpeta client y el index.html
+app.use(express.static(__dirname + '/client'));
+
 //middlewares
 app.use(morgan('dev'));
 app.use(express.json());
@@ -28,6 +31,12 @@ app.use((req, res, next) => {
         return res.redirect(['https://', req.get('Host'), req.url].join(''));
     }
 });
+
+// redirecion 
+app.get('*', (req, res) => {
+    res.sendFile(__dirname + '/client/index.html');
+});
+
 
 
 app.use((error, req, res, next) => {
