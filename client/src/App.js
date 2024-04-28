@@ -9,8 +9,8 @@ function App() {
       {/* <Jqgrid /> */}
 
       {/* <JqGridComponent /> */}
-      <Jqgrid />
-      {/* <Paginate /> */}
+      {/* <Jqgrid /> */}
+      <Paginate />
       
     </div>
   );

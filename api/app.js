@@ -22,6 +22,13 @@ app.get('/', (req, res) => {
     });
 });
 
+// Mixed Content: The page at 'https://
+app.use((req, res, next) => {
+    if(req.headers['x-forwarded-proto'] !== 'https' && config.env === 'production') {
+        return res.redirect(['https://', req.get('Host'), req.url].join(''));
+    }
+});
+
 
 app.use((error, req, res, next) => {
     console.error(error.message);
