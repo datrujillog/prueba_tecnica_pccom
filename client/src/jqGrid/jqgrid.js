@@ -26,7 +26,7 @@ const Jqgrid = () => {
     jQuery(document).ready(function () {
       var lastsel;
       jQuery("#rowed3").jqGrid({
-        url: `http://localhost:5000/api/user/get`,
+        url: `http://3.88.143.154:5000/api/user/get`,
         // url: 'http://localhost:5000/api/user/get/',
         datatype: "json",
         colNames: ['id', 'Name', 'LastName', 'Email'],
@@ -51,7 +51,7 @@ const Jqgrid = () => {
           }
         },
         // editurl: 'http://localhost:5000',
-        editurl: 'http://localhost:5000/api/user/update',
+        editurl: 'http://3.88.143.154:5000/api/user/update',
         caption: "Prueba Tecnica en PCCOM "
       });
       //Reload Grid
@@ -68,7 +68,7 @@ const Jqgrid = () => {
 
   const addNewRecord = () => {
     const rowData = jQuery("#rowed3").jqGrid('editGridRow', 'new', {
-      editurl: 'http://localhost:5000/api/user/create',
+      editurl: 'http://3.88.143.154:5000/api/user/create',
       height: 280,
       reloadAfterSubmit: false,
       closeAfterAdd: true,
@@ -82,7 +82,7 @@ const Jqgrid = () => {
       saveData: 'Data has been changed! Save changes?'
     });
 
-    axios.post('http://localhost:5000/api/user/create', rowData, {
+    axios.post('http://3.88.143.154:5000/api/user/create', rowData, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -105,7 +105,7 @@ const Jqgrid = () => {
     if(!window.confirm('¿Está seguro de que desea eliminar el registro seleccionado?')) return;
     
     const rowData = jQuery("#rowed3").jqGrid('getRowData', selectedRowId)
-    axios.delete(`http://localhost:5000/api/user/delete/${rowData.id}`)
+    axios.delete(`http://3.88.143.154:5000/api/user/delete/${rowData.id}`)
     .then(response => {
       console.log('Registro eliminado exitosamente');
       alert('Registro eliminado exitosamente');
