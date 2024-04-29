@@ -22,8 +22,8 @@ const Jqgrid = () => {
     jQuery(document).ready(function () {
       var lastsel;
       jQuery("#rowed3").jqGrid({
-        // url: 'http://3.88.143.154:5000/api/user/get',
-        url: 'http://localhost:5000/api/user/get/',
+        url: 'http://3.88.143.154:5000/api/user/get',
+        // url: 'http://localhost:5000/api/user/get/',
         datatype: "json",
         colNames: ['id', 'Name', 'LastName', 'Email', 'Password', 'Phone', 'Address', 'City'],
         colModel: [
@@ -43,6 +43,7 @@ const Jqgrid = () => {
         viewrecords: true,
         sortorder: "desc",
         loadui: "block",
+        editable: false,
         onSelectRow: function (id) {
           if (id && id !== lastsel) {
             jQuery('#rowed3').jqGrid('restoreRow', lastsel);
@@ -51,8 +52,8 @@ const Jqgrid = () => {
           }
         },
         // editurl: 'http://localhost:5000',
-        editurl: 'http://localhost:5000/api/user/update',
-        // editurl: 'http://3.88.143.154:5000/api/user/update',
+        // editurl: 'http://localhost:5000/api/user/update',
+        editurl: 'http://3.88.143.154:5000/api/user/update',
         caption: "Prueba Tecnica en PCCOM "
       });
       //Reload Grid
@@ -73,17 +74,6 @@ const Jqgrid = () => {
 
 
     });
-
-    //Eliminar filas selecionadas llamando ala funcion deleteRecord
-    
-
-
-
-   
-    
-
-
-
 
   }, []);
 
