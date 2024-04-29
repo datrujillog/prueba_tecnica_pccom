@@ -1,9 +1,10 @@
 import './App.css';
 import Header from './jqGrid/header';
-import Jqgrid from './jqGrid/jqgrid';
-import JqGridComponent from './jqGrid/JqGridComponent';
-import JqGridPhp from './jqGrid/jqGridPhp';
-import Paginate from './jqGrid/paginate';
+import JqgridDos from './jqGrid/JqgridDos';
+// import Jqgrid from './jqGrid/jqgrid';
+// import JqGridComponent from './jqGrid/JqGridComponent';
+// import JqGridPhp from './jqGrid/jqGridPhp';
+// import Paginate from './jqGrid/JqgridDos';
 
 function App() {
   return (
@@ -13,8 +14,10 @@ function App() {
       {/* <JqGridComponent /> */}
       <Header />
       {/* <Jqgrid /> */}
-      <Paginate />
+      {/* <Jqgrid /> */}
       {/* <JqGridPhp /> */}
+
+      <JqgridDos />
       
     </div>
   );

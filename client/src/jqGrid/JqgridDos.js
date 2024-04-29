@@ -2,21 +2,21 @@
 
 import React, { useEffect } from 'react';
 import axios from 'axios';
-// import './JqGridComponent.css'
-// import 'jqgrid/css/ui.jqgrid.css';
-// import 'jquery-ui/themes/base/all.css';
-// import 'jquery-ui/ui/widgets/datepicker';
-// import 'jquery-ui/ui/widgets/dialog';
-// import 'jquery-ui/ui/widgets/draggable';
-// import 'jquery-ui/ui/widgets/droppable';
-// import 'jquery-ui/ui/widgets/resizable';
-// import 'jquery-ui/ui/widgets/selectable';
-// import 'jquery-ui/ui/widgets/sortable';
-// import 'jquery-ui/ui/widgets/autocomplete';
-// import 'jquery-ui/ui/widgets/accordion';
-// import jquery from 'jquery';
+import './JqGridComponent.css'
+import 'jqgrid/css/ui.jqgrid.css';
+import 'jquery-ui/themes/base/all.css';
+import 'jquery-ui/ui/widgets/datepicker';
+import 'jquery-ui/ui/widgets/dialog';
+import 'jquery-ui/ui/widgets/draggable';
+import 'jquery-ui/ui/widgets/droppable';
+import 'jquery-ui/ui/widgets/resizable';
+import 'jquery-ui/ui/widgets/selectable';
+import 'jquery-ui/ui/widgets/sortable';
+import 'jquery-ui/ui/widgets/autocomplete';
+import 'jquery-ui/ui/widgets/accordion';
+import jquery from 'jquery';
 
-const Jqgrid = () => {
+const JqgridDos = () => {
 
   useEffect(() => {
     jQuery(document).ready(function () {
@@ -150,4 +150,4 @@ const Jqgrid = () => {
   );
 }
 
-export default Jqgrid;
+export default JqgridDos;
