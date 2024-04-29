@@ -16,6 +16,10 @@ const parseDatos = async (body) => {
             Name: body.Name,
             LastName: body.LastName,
             Email: body.Email,
+            Password: body.Password,
+            Phone: body.Phone,
+            Address: body.Address,
+            City: body.City
         };
 
         return dataNormalized;

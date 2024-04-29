@@ -4,6 +4,10 @@ CREATE TABLE `User` (
     `Name` VARCHAR(191) NULL,
     `LastName` VARCHAR(191) NULL,
     `Email` VARCHAR(191) NOT NULL,
+    `Password` VARCHAR(191) NOT NULL,
+    `Phone` VARCHAR(191) NULL,
+    `Address` VARCHAR(191) NULL,
+    `City` VARCHAR(191) NULL,
     `oper` VARCHAR(191) NULL,
 
     PRIMARY KEY (`id`)

@@ -26,15 +26,19 @@ const Jqgrid = () => {
     jQuery(document).ready(function () {
       var lastsel;
       jQuery("#rowed3").jqGrid({
-        url: 'http://3.88.143.154:5000/api/user/get',
-        // url: 'http://localhost:5000/api/user/get/',
+        // url: 'http://3.88.143.154:5000/api/user/get',
+        url: 'http://localhost:5000/api/user/get/',
         datatype: "json",
-        colNames: ['id', 'Name', 'LastName', 'Email'],
+        colNames: ['id', 'Name', 'LastName', 'Email', 'Password', 'Phone', 'Address', 'City'],
         colModel: [
           { name: 'id', index: 'id', width: 50, editable: true, hidden: true, key: true, editrules: { edithidden: false } },
           { name: 'Name', index: 'Name', width: 280, editable: true },
           { name: 'LastName', index: 'LastName', width: 100, editable: true },
           { name: 'Email', index: 'Email', width: 250, sortable: false, editable: true }
+          , { name: 'Password', index: 'Password', width: 100, editable: true }
+          , { name: 'Phone', index: 'Phone', width: 100, editable: true }
+          , { name: 'Address', index: 'Address', width: 100, editable: true }
+          , { name: 'City', index: 'City', width: 100, editable: true }
         ],
         rowNum: 10,
         rowList: [10, 20, 30],
@@ -51,7 +55,8 @@ const Jqgrid = () => {
           }
         },
         // editurl: 'http://localhost:5000',
-        editurl: 'http://3.88.143.154:5000/api/user/update',
+        editurl: 'http://localhost:5000/api/user/update',
+        // editurl: 'http://3.88.143.154:5000/api/user/update',
         caption: "Prueba Tecnica en PCCOM "
       });
       //Reload Grid
@@ -136,7 +141,8 @@ const Jqgrid = () => {
     if(!window.confirm('¿Está seguro de que desea eliminar el registro seleccionado?')) return;
     
     const rowData = jQuery("#rowed3").jqGrid('getRowData', selectedRowId)
-    axios.delete(`http://3.88.143.154:5000/api/user/delete/${rowData.id}`)
+    // axios.delete(`http://3.88.143.154:5000/api/user/delete/${rowData.id}`)
+    axios.delete(`http://localhost:5000/api/user/delete/${rowData.id}`)
     .then(response => {
       console.log('Registro eliminado exitosamente');
       alert('Registro eliminado exitosamente');
@@ -148,7 +154,7 @@ const Jqgrid = () => {
 
   return (
     <div className="container">
-      <h2 className=''>Ejemplo de jqGrid en React</h2>
+      {/* <h2 className=''>Ejemplo de jqGrid en React</h2> */}
       <div className="center">
         <table id="rowed3"></table>
       </div>

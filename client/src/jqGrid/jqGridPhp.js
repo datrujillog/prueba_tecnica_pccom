@@ -20,7 +20,7 @@ import jquery from 'jquery';
 // 3.84.247.50
 // http://3.84.247.50/
 
-const JqGridComponent = () => {
+const JqGridPhp = () => {
 
     useEffect(() => {
         // Inicializar jqGrid
@@ -29,12 +29,16 @@ const JqGridComponent = () => {
             jQuery("#rowed3").jqGrid({
                 url: 'http://localhost:8000/list',
                 datatype: "json",
-                colNames: ['id', 'Name', 'LastName', 'Email'],
+                colNames: ['id', 'Name', 'LastName', 'Email', 'password', 'phone', 'address', 'city'],
                 colModel: [
                     { name: 'id', index: 'id', width: 50, editable: true, hidden: true, key: true, editrules: { edithidden: false } },
-                    { name: 'Name', index: 'Name', width: 300, editable: true },
+                    { name: 'Name', index: 'Name', width: 200, editable: true },
                     { name: 'LastName', index: 'LastName', width: 100, editable: true },
-                    { name: 'Email', index: 'Email', width: 200, sortable: false, editable: true }
+                    { name: 'email', index: 'Email', width: 200, sortable: false, editable: true },
+                    { name: 'password', index: 'password', width: 200, sortable: false, editable: true },
+                    { name: 'phone', index: 'phone', width: 200, sortable: false, editable: true },
+                    { name: 'address', index: 'address', width: 200, sortable: false, editable: true },
+                    { name: 'city', index: 'city', width: 200, sortable: false, editable: true }
                 ],
                 rowNum: 10,               // Número de filas por página
                 rowList: [10, 20, 30],    // Opciones de número de filas por página
@@ -42,14 +46,25 @@ const JqGridComponent = () => {
                 sortname: 'Name',           // Columna por la que se ordenará
                 viewrecords: true,       // Mostrar número de registros
                 sortorder: "desc",
-                onSelectRow: function (id) {
+                oonSelectRow: function (id) {
                     if (id && id !== lastsel) {
                         jQuery('#rowed3').jqGrid('restoreRow', lastsel);
                         jQuery('#rowed3').jqGrid('editRow', id, true);
                         lastsel = id;
+                        var rowData = jQuery('#rowed3').getRowData(id);
+                        axios.get('http://localhost:8000/update', {
+                            params: rowData
+                        })
+                            .then(function (response) {
+                                // manejar la respuesta del servidor
+                            })
+                            .catch(function (error) {
+                                // manejar el error
+                            });
                     }
                 },
                 editurl: 'http://localhost:8000/update',
+                type: 'GET',
                 caption: "Prueba Tecnica en PCCOM "
             });
 
@@ -137,5 +152,5 @@ const JqGridComponent = () => {
     );
 }
 
-export default JqGridComponent;
+export default JqGridPhp;
 

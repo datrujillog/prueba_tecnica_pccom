@@ -18,5 +18,9 @@ model User {
   Name      String?
   LastName  String?
   Email     String   
+  Password  String
+  Phone     String?
+  Address   String?
+  City      String?
   oper      String?
 }
