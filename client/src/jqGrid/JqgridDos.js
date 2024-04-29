@@ -22,8 +22,8 @@ const JqgridDos = () => {
     jQuery(document).ready(function () {
       var lastsel;
       jQuery("#rowed3").jqGrid({
-        // url: 'http://3.88.143.154:5000/api/user/get',
-        url: 'http://localhost:5000/api/user/get/',
+        url: 'http://3.88.143.154:5000/api/user/get',
+        // url: 'http://localhost:5000/api/user/get/',
         datatype: "json",
         colNames: ['id', 'Name', 'LastName', 'Email', 'Password', 'Phone', 'Address', 'City'],
         colModel: [
@@ -36,14 +36,15 @@ const JqgridDos = () => {
           , { name: 'Address', index: 'Address', width: 100, editable: true }
           , { name: 'City', index: 'City', width: 100, editable: true }
         ],
-        rowNum: 10,
-        rowList: [10, 20, 30],
+        rowNum: 50,
+        rowList: [50, 100, 150],
         pager: '#prowed3',
-        sortname: 'id',
+        sortname: 'Name',
         viewrecords: true,
-        sortorder: "asc",
+        sortorder: "desc",
         loadui: "block",
         editable: false,
+        height: '20000%',
         onSelectRow: function (id) {
           if (id && id !== lastsel) {
             jQuery('#rowed3').jqGrid('restoreRow', lastsel);
@@ -52,8 +53,8 @@ const JqgridDos = () => {
           }
         },
         // editurl: 'http://localhost:5000',
-        editurl: 'http://localhost:5000/api/user/update',
-        // editurl: 'http://3.88.143.154:5000/api/user/update',
+        // editurl: 'http://localhost:5000/api/user/update',
+        editurl: 'http://3.88.143.154:5000/api/user/update',
         caption: "Prueba Tecnica en PCCOM "
       });
       //Reload Grid

@@ -21,9 +21,9 @@ class UserService {
         return user;
     }
 
-    async getAllUsers() {
+    async getAllUsers(queryParams) {
 
-        const users = await userRepository.getAllUsers();
+        const users = await userRepository.getAllUsers(queryParams);
         return users
     }
 

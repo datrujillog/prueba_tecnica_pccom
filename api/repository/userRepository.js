@@ -37,11 +37,36 @@ class UserRepository {
         }
     }
 
-    async getAllUsers() {
+    // async getAllUsers() {
 
+    //     try {
+
+    //         const users = await this.#userModel.findMany();
+    //         if (users.length === 0) throw new NotFound("Users not found");
+
+    //         return users;
+
+    //     } catch (error) {
+    //         throw new BadRequest(error.message);
+    //     }
+    // }
+
+
+    async getAllUsers(queryParams) {
         try {
+            let filters = {};
+            if (queryParams.filters) {
+                let parsedFilters = JSON.parse(decodeURIComponent(queryParams.filters));
+                parsedFilters.rules.forEach(rule => {
+                    filters[rule.field] = rule.data;
+                });
+            }
 
-            const users = await this.#userModel.findMany();
+            const users = await this.#userModel.findMany({
+                where: {
+                    AND: filters
+                }
+            });
             if (users.length === 0) throw new NotFound("Users not found");
 
             return users;
@@ -128,16 +153,16 @@ class UserRepository {
             // Verificar si hay más usuarios disponibles
             const totalUsersCount = await this.#userModel.count(); // Obtener el total de usuarios
             const hasMore = (pageNumber * take) < totalUsersCount;
-            return {users, hasMore }
-            
+            return { users, hasMore }
+
         } catch (error) {
             throw new BadRequest(error.message);
         }
     }
-    
-    
-    
-    
+
+
+
+
 }
 module.exports = new UserRepository();
 

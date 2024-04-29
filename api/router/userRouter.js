@@ -42,7 +42,7 @@ class UserRouter {
 
             try {
 
-                const response = await userService.getAllUsers();
+                const response = await userService.getAllUsers(req.query);
                 res.send(response)
 
             } catch (error) {
