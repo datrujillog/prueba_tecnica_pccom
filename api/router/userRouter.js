@@ -78,12 +78,24 @@ class UserRouter {
                 if (oper == 'add') {
                     try {
                         const response = await userService.createUser(body);
-                        res.send(response)
+                        res.json(response)
                     } catch (error) {
                         errorResponse(res, error.message);
                     }
+                }
+                else if (oper == 'del') {
+                    try {
 
-                } else {
+                        const response = await userService.deleteUser(req.body.id);
+                        if (!response) throw new Error(response.error.message);
+                        res.json({
+                            success: true
+                        });
+                    } catch (error) {
+                        errorResponse(res, error.message);
+                    }
+                }
+                else {
                     const response = await userService.updateUser(userId, body);
                     if (!response.success) throw new Error(response.error.message);
                     const { user } = response;
@@ -119,12 +131,12 @@ class UserRouter {
 
             try {
 
-                const pageNumber =  parseInt(req.query.pageNumber) || 1;
+                const pageNumber = parseInt(req.query.pageNumber) || 1;
                 const take = parseInt(req.query.take) || 5;
 
                 const response = await userService.getPaginatedUsers(pageNumber, take);
                 const { users, hasMore } = response;
-                res.json({users, hasMore});
+                res.json({ users, hasMore });
 
 
             } catch (error) {

@@ -12,8 +12,8 @@ function App() {
 
       {/* <JqGridComponent /> */}
       <Header />
-      <Jqgrid />
-      {/* <Paginate /> */}
+      {/* <Jqgrid /> */}
+      <Paginate />
       {/* <JqGridPhp /> */}
       
     </div>

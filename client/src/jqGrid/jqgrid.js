@@ -2,26 +2,22 @@
 
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import './JqGridComponent.css'
-
-import 'jqgrid/css/ui.jqgrid.css';
-import 'jquery-ui/themes/base/all.css';
-import 'jquery-ui/ui/widgets/datepicker';
-import 'jquery-ui/ui/widgets/dialog';
-import 'jquery-ui/ui/widgets/draggable';
-import 'jquery-ui/ui/widgets/droppable';
-import 'jquery-ui/ui/widgets/resizable';
-import 'jquery-ui/ui/widgets/selectable';
-import 'jquery-ui/ui/widgets/sortable';
-import 'jquery-ui/ui/widgets/autocomplete';
-import 'jquery-ui/ui/widgets/accordion';
-import jquery from 'jquery';
+// import './JqGridComponent.css'
+// import 'jqgrid/css/ui.jqgrid.css';
+// import 'jquery-ui/themes/base/all.css';
+// import 'jquery-ui/ui/widgets/datepicker';
+// import 'jquery-ui/ui/widgets/dialog';
+// import 'jquery-ui/ui/widgets/draggable';
+// import 'jquery-ui/ui/widgets/droppable';
+// import 'jquery-ui/ui/widgets/resizable';
+// import 'jquery-ui/ui/widgets/selectable';
+// import 'jquery-ui/ui/widgets/sortable';
+// import 'jquery-ui/ui/widgets/autocomplete';
+// import 'jquery-ui/ui/widgets/accordion';
+// import jquery from 'jquery';
 
 const Jqgrid = () => {
 
-
-
-  
   useEffect(() => {
     jQuery(document).ready(function () {
       var lastsel;
@@ -60,16 +56,10 @@ const Jqgrid = () => {
         caption: "Prueba Tecnica en PCCOM "
       });
       //Reload Grid
-      jQuery("#rowed3").trigger('reloadGrid'); 
+      jQuery("#rowed3").trigger('reloadGrid');
 
-      //add
-      // jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true });
-
-      //delete
-      // jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true, search: true }, {}, {}, {}, { multipleSearch: true });
-
-      //boton para eliminar registro
-      jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true, search: true }, {}, {}, {}, { multipleSearch: true, reloadAfterSubmit: false,
+      jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true, search: true }, {}, {}, {}, {
+        multipleSearch: true, reloadAfterSubmit: false,
         closeAfterAdd: true,
         closeAfterEdit: true,
         closeOnEscape: true,
@@ -77,31 +67,22 @@ const Jqgrid = () => {
         caption: 'Agregar Registro',
         bSubmit: 'Guardar',
         bCancel: 'Cancelar',
-        bClose: 'Cerrar',});
-// 
-      // jQuery("#rowed3").jqGrid('getGridParam', 'selrow', { edit: true, add: true, del: true, search: true }, {}, {}, {}, { multipleSearch: true, reloadAfterSubmit: false,
-      //   closeAfterAdd: true,
-      //   closeAfterEdit: true,
-      //   closeOnEscape: true,
-      //   savekey: [true, 13],
-      //   caption: 'Agregar Registro',
-      //   bSubmit: 'Guardar',
-      //   bCancel: 'Cancelar',
-      //   bClose: 'Cerrar',});
-      
-      // jQuery("#rowed3").jqGrid('getGridParam', 'selrow');
-     
+        bClose: 'Cerrar',
+        center: true,
+      });
+
 
     });
   }, []);
 
   const reloadGrid = () => {
     jQuery("#rowed3").trigger('reloadGrid'); // Esto recarga la tabla
-};
+  };
 
   const addNewRecord = () => {
     const rowData = jQuery("#rowed3").jqGrid('editGridRow', 'new', {
       editurl: 'http://3.88.143.154:5000/api/user/create',
+      center: true,
       height: 280,
       reloadAfterSubmit: false,
       closeAfterAdd: true,
@@ -134,18 +115,18 @@ const Jqgrid = () => {
       alert('Seleccione un registro para eliminar');
       //actualizar la tabla despues de eliminar
       reloadGrid();
-      
+
       return;
     }
 
-    if(!window.confirm('¿Está seguro de que desea eliminar el registro seleccionado?')) return;
-    
+    if (!window.confirm('¿Está seguro de que desea eliminar el registro seleccionado?')) return;
+
     const rowData = jQuery("#rowed3").jqGrid('getRowData', selectedRowId)
     // axios.delete(`http://3.88.143.154:5000/api/user/delete/${rowData.id}`)
     axios.delete(`http://localhost:5000/api/user/delete/${rowData.id}`)
-    .then(response => {
-      console.log('Registro eliminado exitosamente');
-      alert('Registro eliminado exitosamente');
+      .then(response => {
+        console.log('Registro eliminado exitosamente');
+        alert('Registro eliminado exitosamente');
       })
       .catch(error => {
         console.error('Error:', error);
