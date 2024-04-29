@@ -65,11 +65,21 @@ class UserRepository {
             const users = await this.#userModel.findMany({
                 where: {
                     AND: filters
-                }
+                },
+                skip: (parseInt(queryParams.page) - 1) * parseInt(queryParams.rows),
+                take: parseInt(queryParams.rows)
             });
             if (users.length === 0) throw new NotFound("Users not found");
 
-            return users;
+            const totalUsersCount = await this.#userModel.count();
+            const hasMore = (parseInt(queryParams.page) * parseInt(queryParams.rows)) < totalUsersCount;
+
+            const response = {
+                users,
+                hasMore
+            };
+
+            return response;
 
         } catch (error) {
             throw new BadRequest(error.message);

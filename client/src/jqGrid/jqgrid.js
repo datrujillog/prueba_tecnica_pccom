@@ -36,18 +36,27 @@ const Jqgrid = () => {
           , { name: 'Address', index: 'Address', width: 100, editable: true }
           , { name: 'City', index: 'City', width: 100, editable: true }
         ],
-        rowNum: 10,
+        rowNum: 5,
         rowList: [10, 20, 30],
         pager: '#prowed3',
         sortname: 'Name',
         viewrecords: true,
         sortorder: "desc",
         loadui: "block",
-        onSelectRow: function (id) {
-          if (id && id !== lastsel) {
-            jQuery('#rowed3').jqGrid('restoreRow', lastsel);
-            jQuery('#rowed3').jqGrid('editRow', id, true);
-            lastsel = id;
+        // onSelectRow: function (id) {
+        //   if (id && id !== lastsel) {
+        //     jQuery('#rowed3').jqGrid('restoreRow', lastsel);
+        //     jQuery('#rowed3').jqGrid('editRow', id, true);
+        //     lastsel = id;
+        //   }
+        // },
+        loadComplete: function (data) {
+          if (data && data.users) {
+            const users = data.users;
+            for (let i = 0; i < users.length; i++) {
+              const user = users[i];
+              jQuery("#rowed3").jqGrid('addRowData', user.id, user);
+            }
           }
         },
         // editurl: 'http://localhost:5000',

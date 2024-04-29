@@ -1,7 +1,7 @@
 import './App.css';
 import Header from './jqGrid/header';
 import JqgridDos from './jqGrid/JqgridDos';
-// import Jqgrid from './jqGrid/jqgrid';
+import Jqgrid from './jqGrid/jqgrid';
 // import JqGridComponent from './jqGrid/JqGridComponent';
 // import JqGridPhp from './jqGrid/jqGridPhp';
 // import Paginate from './jqGrid/JqgridDos';

@@ -21,10 +21,10 @@ class UserService {
         return user;
     }
 
-    async getAllUsers(queryParams) {
+    async AllUsers(queryParams) {
 
-        const users = await userRepository.getAllUsers(queryParams);
-        return users
+        const {users,hasMore} = await userRepository.getAllUsers(queryParams);
+        return {users,hasMore};
     }
 
     // async getAllUsers(page, pageSize) {
