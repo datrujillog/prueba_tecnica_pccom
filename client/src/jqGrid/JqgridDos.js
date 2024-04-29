@@ -22,8 +22,8 @@ const JqgridDos = () => {
     jQuery(document).ready(function () {
       var lastsel;
       jQuery("#rowed3").jqGrid({
-        url: 'http://3.88.143.154:5000/api/user/get',
-        // url: 'http://localhost:5000/api/user/get/',
+        // url: 'http://3.88.143.154:5000/api/user/get',
+        url: 'http://localhost:5000/api/user/get/',
         datatype: "json",
         colNames: ['id', 'Name', 'LastName', 'Email', 'Password', 'Phone', 'Address', 'City'],
         colModel: [
@@ -41,7 +41,7 @@ const JqgridDos = () => {
         pager: '#prowed3',
         sortname: 'id',
         viewrecords: true,
-        sortorder: "desc",
+        sortorder: "asc",
         loadui: "block",
         editable: false,
         onSelectRow: function (id) {
@@ -52,8 +52,8 @@ const JqgridDos = () => {
           }
         },
         // editurl: 'http://localhost:5000',
-        // editurl: 'http://localhost:5000/api/user/update',
-        editurl: 'http://3.88.143.154:5000/api/user/update',
+        editurl: 'http://localhost:5000/api/user/update',
+        // editurl: 'http://3.88.143.154:5000/api/user/update',
         caption: "Prueba Tecnica en PCCOM "
       });
       //Reload Grid
@@ -72,75 +72,12 @@ const JqgridDos = () => {
         center: true,
       });
 
-      // jQuery("#rowed3").jqGrid('navButtonAdd', '#prowed3', { 
-      //   caption: "Agregar", 
-      //   buttonicon: "ui-icon-plus", 
-      //   onClickButton: addNewRecord, 
-      //   position: "last" 
-      // });
-
 
     });
 
   }, []);
 
-  const reloadGrid = () => {
-    jQuery("#rowed3").trigger('reloadGrid'); // Esto recarga la tabla
-  };
 
-  const addNewRecord = () => {
-    const rowData = jQuery("#rowed3").jqGrid('editGridRow', 'new', {
-      editurl: 'http://3.88.143.154:5000/api/user/create',
-      center: true,
-      height: 280,
-      reloadAfterSubmit: false,
-      closeAfterAdd: true,
-      closeAfterEdit: true,
-      closeOnEscape: true,
-      savekey: [true, 13],
-      caption: 'Agregar Registro',
-      bSubmit: 'Guardar',
-      bCancel: 'Cancelar',
-      bClose: 'Cerrar',
-      saveData: 'Data has been changed! Save changes?'
-    });
-
-    axios.post('http://3.88.143.154:5000/api/user/create', rowData, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        console.log('Registro agregado exitosamente');
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  };
-
-  const deleteRecord = () => {
-    const selectedRowId = jQuery("#rowed3").jqGrid('getGridParam', 'selrow');
-    if (!selectedRowId) {
-      alert('Seleccione un registro para eliminar');
-      //actualizar la tabla despues de eliminar
-      reloadGrid();
-
-      return;
-    }
-
-    if (!window.confirm('¿Está seguro de que desea eliminar el registro seleccionado?')) return;
-
-    const rowData = jQuery("#rowed3").jqGrid('getRowData', selectedRowId)
-    // axios.delete(`http://3.88.143.154:5000/api/user/delete/${rowData.id}`)
-    axios.delete(`http://localhost:5000/api/user/delete/${rowData.id}`)
-      .then(response => {
-        console.log('Registro eliminado exitosamente');
-        alert('Registro eliminado exitosamente');
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  };
 
   return (
     <div className="container">
