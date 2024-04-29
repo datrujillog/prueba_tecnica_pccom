@@ -39,7 +39,7 @@ const JqgridDos = () => {
         rowNum: 10,
         rowList: [10, 20, 30],
         pager: '#prowed3',
-        sortname: 'Name',
+        sortname: 'id',
         viewrecords: true,
         sortorder: "desc",
         loadui: "block",
@@ -59,10 +59,10 @@ const JqgridDos = () => {
       //Reload Grid
       jQuery("#rowed3").trigger('reloadGrid');
 
-      jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true, search: true }, {}, {}, {}, {
+      jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true, search: true,  }, {}, {}, {}, {
         multipleSearch: true, reloadAfterSubmit: false,
         closeAfterAdd: true,
-        closeAfterEdit: true,
+        closeAfterEdit: false,
         closeOnEscape: true,
         savekey: [true, 13],
         caption: 'Agregar Registro',
@@ -71,6 +71,13 @@ const JqgridDos = () => {
         bClose: 'Cerrar',
         center: true,
       });
+
+      // jQuery("#rowed3").jqGrid('navButtonAdd', '#prowed3', { 
+      //   caption: "Agregar", 
+      //   buttonicon: "ui-icon-plus", 
+      //   onClickButton: addNewRecord, 
+      //   position: "last" 
+      // });
 
 
     });
