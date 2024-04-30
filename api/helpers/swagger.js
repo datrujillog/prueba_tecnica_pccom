@@ -8,14 +8,15 @@ const swaggerAPi = {
     "version": "1.0.0"
   },
   "servers": [
-    {
-      "url": "http://localhost:5000",
-      "description": "Local server"
-    },
     { 
       "url": "http://3.88.143.154:5000",
       "description": "Server AWS"
+    },
+    {
+      "url": "http://localhost:5000",
+      "description": "Local server"
     }
+    
       
     
   ],
