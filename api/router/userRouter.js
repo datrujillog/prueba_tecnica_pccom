@@ -44,10 +44,12 @@ class UserRouter {
 
                 const response= await userService.AllUsers(req.query);
                 // res.send({users,hasMore})
+                if(!response) res.send({success:false})
                 res.send(response)
 
             } catch (error) {
                 errorResponse(res, error.message);
+                // return res.send({ error: error.message });
             }
         });
 

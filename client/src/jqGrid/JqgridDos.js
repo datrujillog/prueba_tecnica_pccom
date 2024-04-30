@@ -22,8 +22,8 @@ const JqgridDos = () => {
     jQuery(document).ready(function () {
       // var lastsel;
       jQuery("#rowed3").jqGrid({
-        url: 'http://3.88.143.154:5000/api/user/get',
-        // url: 'http://localhost:5000/api/user/get/',
+        // url: 'http://3.88.143.154:5000/api/user/get',
+        url: 'http://localhost:5000/api/user/get/',
         datatype: "json",
         colNames: ['id', 'Name', 'LastName', 'Email', 'Password', 'Phone', 'Address', 'City'],
         colModel: [
@@ -36,9 +36,9 @@ const JqgridDos = () => {
           , { name: 'Address', index: 'Address', width: 100, editable: true }
           , { name: 'City', index: 'City', width: 100, editable: true }
         ],
-        
+
         rowNum: 5,
-        rowList: [5,10,20],
+        rowList: [5, 10, 20],
         pager: '#prowed3',
         sortname: 'Name',
         viewrecords: true,
@@ -46,46 +46,40 @@ const JqgridDos = () => {
         loadui: "block",
         edit: true,
         height: '20000%',
-        // onSelectRow: function (id) {
-        //   if (id && id !== lastsel) {
-        //     jQuery('#rowed3').jqGrid('restoreRow', lastsel);
-        //     jQuery('#rowed3').jqGrid('editRow', id, true);
-        //     lastsel = id;
-        //   }
-        //   // jQuery('.ui-pg-input, .ui-pg-button').prop('disabled', false);
-        // },
-
         loadComplete: function (data) {
-          if (data && data.users) {
-            const users = data.users;
+          if(data.rows.length === 0) alert('No hay registros en la base de datos');
+
+          if (data && data.rows) {
+            const users = data.rows;
             for (let i = 0; i < users.length; i++) {
               const user = users[i];
               jQuery("#rowed3").jqGrid('addRowData', user.id, user);
             }
+
           }
           
-          
-        },
+        },       
         // editurl: 'http://localhost:5000',
-        // editurl: 'http://localhost:5000/api/user/update',
-        editurl: 'http://3.88.143.154:5000/api/user/update',
+        // editurl: 'http://localhost:5000',
+        editurl: 'http://localhost:5000/api/user/update',
+        // editurl: 'http://3.88.143.154:5000/api/user/update',
         caption: "Prueba Tecnica en PCCOM "
       });
       //Reload Grid
       jQuery("#rowed3").trigger('reloadGrid');
 
       jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true, search: true, }, {}, {}, {}, {
-        multipleSearch: true, 
-        // reloadAfterSubmit: false, 
-        // closeAfterAdd: true,
-        // closeAfterEdit: false,
-        // closeOnEscape: true,
-        // savekey: [true, 13],
-        // caption: 'Buscar Informacion',
-        // bSubmit: 'Guardar',
-        // bCancel: 'Cancelar',
-        // bClose: 'Cerrar',
-        // center: true,
+        multipleSearch: true,
+        reloadAfterSubmit: false, 
+        closeAfterAdd: true,
+        closeAfterEdit: false,
+        closeOnEscape: true,
+        savekey: [true, 13],
+        caption: 'Buscar Informacion',
+        bSubmit: 'Guardar',
+        bCancel: 'Cancelar',
+        bClose: 'Cerrar',
+        center: true,
       });
 
 

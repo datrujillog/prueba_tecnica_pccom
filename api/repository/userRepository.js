@@ -69,7 +69,14 @@ class UserRepository {
                 skip: (parseInt(queryParams.page) - 1) * parseInt(queryParams.rows),
                 take: parseInt(queryParams.rows)
             });
-            if (users.length === 0) throw new NotFound("Users not found");
+            if (users.length === 0) {
+                return {
+                    page: 1,
+                    total: 1,
+                    records: 0,
+                    rows: []
+                }
+            }
 
             // const totalUsersCount = await this.#userModel.count();
             // const hasMore = (parseInt(queryParams.page) * parseInt(queryParams.rows)) < totalUsersCount;
@@ -87,6 +94,13 @@ class UserRepository {
 
         } catch (error) {
             throw new BadRequest(error.message);
+            // return {
+            //     page: 1,
+            //     total: 1,
+            //     records: 0,
+            //     rows: []
+            
+            // }
         }
     }
 
