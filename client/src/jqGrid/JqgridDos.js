@@ -48,26 +48,38 @@ const JqgridDos = () => {
         edit: true,
         height: '20000%',
         loadComplete: function (data) {
-          if(data.rows.length === 0) {
+          if(data.rows.length === 0) 
+          {
             swal.fire({
-              title: 'Error!',
-              text: 'No hay registros en la base de datos',
-              icon: 'error',
-              button: 'Ok'
-              // confirmButtonText: 'Ok'
+              title: 'No hay registros',
+              text: 'Ningún registro coincide con la búsqueda',
+              icon: 'info',
+              confirmButtonText: 'Ok'
             });
-          }
 
-          if (data && data.rows) {
-            const users = data.rows;
-            for (let i = 0; i < users.length; i++) {
-              const user = users[i];
-              jQuery("#rowed3").jqGrid('addRowData', user.id, user);
+            if(data && data.rows) {
+              const users = data.rows;
+              for (let i = 0; i < users.length; i++) {
+                const user = users[i];
+                jQuery("#rowed3").jqGrid('addRowData', user.id, user);
+              }
             }
-
-          }
           
-        },       
+          }
+        },
+        // loadComplete: function (data) {
+        //   if(data.rows.length === 0) alert('No hay registros en la base de datos');
+
+        //   if (data && data.rows) {
+        //     const users = data.rows;
+        //     for (let i = 0; i < users.length; i++) {
+        //       const user = users[i];
+        //       jQuery("#rowed3").jqGrid('addRowData', user.id, user);
+        //     }
+
+        //   }
+          
+        // },       
         // editurl: 'http://localhost:5000',
         // editurl: 'http://localhost:5000',
         // editurl: 'http://localhost:5000/api/user/update',
