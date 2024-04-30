@@ -37,8 +37,8 @@ const JqgridDos = () => {
           , { name: 'City', index: 'City', width: 100, editable: true }
         ],
         
-        rowNum: 4,
-        rowList: [4,10,20],
+        rowNum: 5,
+        rowList: [5,10,20],
         pager: '#prowed3',
         sortname: 'Name',
         viewrecords: true,
