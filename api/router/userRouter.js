@@ -42,8 +42,9 @@ class UserRouter {
 
             try {
 
-                const {users,hasMore} = await userService.AllUsers(req.query);
-                res.send({users,hasMore})
+                const response= await userService.AllUsers(req.query);
+                // res.send({users,hasMore})
+                res.send(response)
 
             } catch (error) {
                 errorResponse(res, error.message);

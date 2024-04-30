@@ -71,14 +71,18 @@ class UserRepository {
             });
             if (users.length === 0) throw new NotFound("Users not found");
 
+            // const totalUsersCount = await this.#userModel.count();
+            // const hasMore = (parseInt(queryParams.page) * parseInt(queryParams.rows)) < totalUsersCount;
+
             const totalUsersCount = await this.#userModel.count();
-            const hasMore = (parseInt(queryParams.page) * parseInt(queryParams.rows)) < totalUsersCount;
+            const totalPageCount = Math.ceil(totalUsersCount / parseInt(queryParams.rows));
 
             const response = {
-                users,
-                hasMore
+                page: queryParams.page, // número de página actual
+                total: totalPageCount, // total de páginas
+                records: totalUsersCount, // total de registros
+                rows: users // registros para la página actual
             };
-
             return response;
 
         } catch (error) {

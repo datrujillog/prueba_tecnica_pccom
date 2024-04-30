@@ -23,8 +23,8 @@ class UserService {
 
     async AllUsers(queryParams) {
 
-        const {users,hasMore} = await userRepository.getAllUsers(queryParams);
-        return {users,hasMore};
+        const response = await userRepository.getAllUsers(queryParams);
+        return response;
     }
 
     // async getAllUsers(page, pageSize) {

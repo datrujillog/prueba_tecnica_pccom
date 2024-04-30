@@ -36,21 +36,23 @@ const JqgridDos = () => {
           , { name: 'Address', index: 'Address', width: 100, editable: true }
           , { name: 'City', index: 'City', width: 100, editable: true }
         ],
+        
         rowNum: 4,
-        rowList: [5, 10, 20],
+        rowList: [4,10,20],
         pager: '#prowed3',
         sortname: 'Name',
         viewrecords: true,
         sortorder: "desc",
         loadui: "block",
         edit: true,
-        // height: '20000%',
+        height: '20000%',
         // onSelectRow: function (id) {
         //   if (id && id !== lastsel) {
         //     jQuery('#rowed3').jqGrid('restoreRow', lastsel);
         //     jQuery('#rowed3').jqGrid('editRow', id, true);
         //     lastsel = id;
         //   }
+        //   // jQuery('.ui-pg-input, .ui-pg-button').prop('disabled', false);
         // },
 
         loadComplete: function (data) {
@@ -61,7 +63,6 @@ const JqgridDos = () => {
               jQuery("#rowed3").jqGrid('addRowData', user.id, user);
             }
           }
-          // habilitar  los botones de paginacion
           
           
         },
@@ -71,20 +72,20 @@ const JqgridDos = () => {
         caption: "Prueba Tecnica en PCCOM "
       });
       //Reload Grid
-      jQuery('.ui-pg-input, .ui-pg-button').prop('disabled', false);   // estab linea habilita los botones de paginacion
       jQuery("#rowed3").trigger('reloadGrid');
 
       jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true, search: true, }, {}, {}, {}, {
-        multipleSearch: true, reloadAfterSubmit: false,
-        closeAfterAdd: true,
-        closeAfterEdit: false,
-        closeOnEscape: true,
-        savekey: [true, 13],
-        caption: 'Buscar Informacion',
-        bSubmit: 'Guardar',
-        bCancel: 'Cancelar',
-        bClose: 'Cerrar',
-        center: true,
+        multipleSearch: true, 
+        // reloadAfterSubmit: false, 
+        // closeAfterAdd: true,
+        // closeAfterEdit: false,
+        // closeOnEscape: true,
+        // savekey: [true, 13],
+        // caption: 'Buscar Informacion',
+        // bSubmit: 'Guardar',
+        // bCancel: 'Cancelar',
+        // bClose: 'Cerrar',
+        // center: true,
       });
 
 
