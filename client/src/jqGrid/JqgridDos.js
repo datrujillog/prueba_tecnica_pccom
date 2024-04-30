@@ -15,6 +15,7 @@ import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/autocomplete';
 import 'jquery-ui/ui/widgets/accordion';
 import jquery from 'jquery';
+import swal from 'sweetalert2';
 
 const JqgridDos = () => {
 
@@ -22,8 +23,8 @@ const JqgridDos = () => {
     jQuery(document).ready(function () {
       // var lastsel;
       jQuery("#rowed3").jqGrid({
-        // url: 'http://3.88.143.154:5000/api/user/get',
-        url: 'http://localhost:5000/api/user/get/',
+        url: 'http://3.88.143.154:5000/api/user/get',
+        // url: 'http://localhost:5000/api/user/get/',
         datatype: "json",
         colNames: ['id', 'Name', 'LastName', 'Email', 'Password', 'Phone', 'Address', 'City'],
         colModel: [
@@ -47,7 +48,15 @@ const JqgridDos = () => {
         edit: true,
         height: '20000%',
         loadComplete: function (data) {
-          if(data.rows.length === 0) alert('No hay registros en la base de datos');
+          if(data.rows.length === 0) {
+            swal.fire({
+              title: 'Error!',
+              text: 'No hay registros en la base de datos',
+              icon: 'error',
+              button: 'Ok'
+              // confirmButtonText: 'Ok'
+            });
+          }
 
           if (data && data.rows) {
             const users = data.rows;
@@ -61,8 +70,8 @@ const JqgridDos = () => {
         },       
         // editurl: 'http://localhost:5000',
         // editurl: 'http://localhost:5000',
-        editurl: 'http://localhost:5000/api/user/update',
-        // editurl: 'http://3.88.143.154:5000/api/user/update',
+        // editurl: 'http://localhost:5000/api/user/update',
+        editurl: 'http://3.88.143.154:5000/api/user/update',
         caption: "Prueba Tecnica en PCCOM "
       });
       //Reload Grid
