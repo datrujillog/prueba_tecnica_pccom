@@ -2,6 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const { config } = require('./config/config');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./helpers/swagger');
 
 const router = require('./router/index');
 
@@ -25,18 +27,19 @@ app.get('/', (req, res) => {
     });
 });
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+
 // Mixed Content: The page at 'https://
-app.use((req, res, next) => {
-    if(req.headers['x-forwarded-proto'] !== 'https' && config.env === 'production') {
-        return res.redirect(['https://', req.get('Host'), req.url].join(''));
-    }
-});
+// app.use((req, res, next) => {
+//     if(req.headers['x-forwarded-proto'] !== 'https' && config.env === 'production') {
+//         return res.redirect(['https://', req.get('Host'), req.url].join(''));
+//     }
+// });
 
 // redirecion 
 // app.get('*', (req, res) => {
 //     res.sendFile(__dirname + '/client/index.html');
 // });
-
 
 
 app.use((error, req, res, next) => {
@@ -49,6 +52,9 @@ app.use((error, req, res, next) => {
 app.listen(config.port, () => {
     console.log("Server is running on port " + config.port);
     console.log("http://localhost:" + config.port + "/api/");
+
+    //swagger
+    console.log("http://localhost:" + config.port + "/api-docs/");
   });
   
 

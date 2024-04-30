@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
 import React, { useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import './JqGridComponent.css'
 import 'jqgrid/css/ui.jqgrid.css';
 import 'jquery-ui/themes/base/all.css';
@@ -14,7 +14,7 @@ import 'jquery-ui/ui/widgets/selectable';
 import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/autocomplete';
 import 'jquery-ui/ui/widgets/accordion';
-import jquery from 'jquery';
+// import jquery from 'jquery';
 import swal from 'sweetalert2';
 
 const JqgridDos = () => {
@@ -43,43 +43,21 @@ const JqgridDos = () => {
         pager: '#prowed3',
         sortname: 'Name',
         viewrecords: true,
-        sortorder: "desc",
+        sortorder: "asc",
         loadui: "block",
         edit: true,
         height: '20000%',
         loadComplete: function (data) {
-          if(data.rows.length === 0) 
-          {
+          if (data.rows.length === 0) {
             swal.fire({
               title: 'No hay registros',
               text: 'Ningún registro coincide con la búsqueda',
               icon: 'info',
               confirmButtonText: 'Ok'
             });
-
-            if(data && data.rows) {
-              const users = data.rows;
-              for (let i = 0; i < users.length; i++) {
-                const user = users[i];
-                jQuery("#rowed3").jqGrid('addRowData', user.id, user);
-              }
-            }
-          
           }
         },
-        // loadComplete: function (data) {
-        //   if(data.rows.length === 0) alert('No hay registros en la base de datos');
 
-        //   if (data && data.rows) {
-        //     const users = data.rows;
-        //     for (let i = 0; i < users.length; i++) {
-        //       const user = users[i];
-        //       jQuery("#rowed3").jqGrid('addRowData', user.id, user);
-        //     }
-
-        //   }
-          
-        // },       
         // editurl: 'http://localhost:5000',
         // editurl: 'http://localhost:5000',
         // editurl: 'http://localhost:5000/api/user/update',
@@ -91,11 +69,11 @@ const JqgridDos = () => {
 
       jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true, search: true, }, {}, {}, {}, {
         multipleSearch: true,
-        reloadAfterSubmit: false, 
+        reloadAfterSubmit: false,
         closeAfterAdd: true,
         closeAfterEdit: false,
         closeOnEscape: true,
-        savekey: [true, 13],
+        savekey: [true, 13],  // Enter key
         caption: 'Buscar Informacion',
         bSubmit: 'Guardar',
         bCancel: 'Cancelar',
@@ -108,8 +86,6 @@ const JqgridDos = () => {
 
   }, []);
 
-
-
   return (
     <div className="container">
       {/* <h2 className=''>Ejemplo de jqGrid en React</h2> */}
@@ -118,9 +94,7 @@ const JqgridDos = () => {
       </div>
       <div id="prowed3"></div>
       <br />
-      {/* <button className="btn" onClick={addNewRecord}>Agregar</button>
-      <button className="btn" onClick={deleteRecord}>Eliminar</button>
-      <button className="btn" onClick={reloadGrid}>Recargar</button> */}
+
     </div>
   );
 }

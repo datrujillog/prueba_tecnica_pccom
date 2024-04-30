@@ -53,7 +53,7 @@ class UserService {
     }
 
     async updateUser(id, userData) {
-        const updatedUser = await userRepository.updateUser(id, userData);
+        const updatedUser = await userRepository.updateUsers(id, userData);
         if (!updatedUser) {
             return {
                 ok: false,

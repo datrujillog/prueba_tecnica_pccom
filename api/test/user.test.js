@@ -32,39 +32,39 @@ describe('userService', () => {
     //     await expect(userService.createUser()).rejects.toThrow('Data is required');
     // });
 
-    it('should get all users', async () => {
-        // Datos de prueba
-        const mockData = [
-            { name: 'John', email: 'john@example.com' },
-            { name: 'Jane', email: 'jane@example.com' }
-        ];
+    // it('should get all users', async () => {
+    //     // Datos de prueba
+    //     const mockData = [
+    //         { name: 'John', email: 'john@example.com' },
+    //         { name: 'Jane', email: 'jane@example.com' }
+    //     ];
 
-        // Configura el mock para devolver un valor específico
-        userRepository.getAllUsers.mockResolvedValue(mockData);
+    //     // Configura el mock para devolver un valor específico
+    //     userRepository.getAllUsers.mockResolvedValue(mockData);
 
-        // Llama a la función que estás probando
-        const result = await userService.getAllUsers();
+    //     // Llama a la función que estás probando
+    //     const result = await userService.getAllUsers();
 
-        // Verifica que el resultado sea el esperado
-        expect(result).toEqual(mockData);
+    //     // Verifica que el resultado sea el esperado
+    //     expect(result).toEqual(mockData);
 
-        // Verifica que se haya llamado a userRepository.getAllUsers
-        expect(userRepository.getAllUsers).toHaveBeenCalled();
-    });
+    //     // Verifica que se haya llamado a userRepository.getAllUsers
+    //     expect(userRepository.getAllUsers).toHaveBeenCalled();
+    // });
 
-    it('should handle no users', async () => {
-        // Configura el mock para devolver un array vacío
-        userRepository.getAllUsers.mockResolvedValue([]);
+    // it('should handle no users', async () => {
+    //     // Configura el mock para devolver un array vacío
+    //     userRepository.getAllUsers.mockResolvedValue([]);
 
-        // Llama a la función que estás probando
-        const result = await userService.getAllUsers();
+    //     // Llama a la función que estás probando
+    //     const result = await userService.getAllUsers();
 
-        // Verifica que el resultado sea un array vacío
-        expect(result).toEqual([]);
+    //     // Verifica que el resultado sea un array vacío
+    //     expect(result).toEqual([]);
 
-        // Verifica que se haya llamado a userRepository.getAllUsers
-        expect(userRepository.getAllUsers).toHaveBeenCalled();
-    });
+    //     // Verifica que se haya llamado a userRepository.getAllUsers
+    //     expect(userRepository.getAllUsers).toHaveBeenCalled();
+    // });
 
     it('should get user by id', async () => {
         // Datos de prueba

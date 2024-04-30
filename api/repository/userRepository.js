@@ -129,11 +129,11 @@ class UserRepository {
         }
     }
 
-    async updateUser(id, data) {
+    async updateUsers(id, data) {
 
         try {
             if (!id) throw new BadRequest("Id is required");
-
+            
             const user = await this.#userModel.update({
                 where: {
                     id: id
