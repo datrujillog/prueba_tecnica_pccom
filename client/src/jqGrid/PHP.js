@@ -48,14 +48,14 @@ const Php = () => {
         loadComplete: function (data) {
           console.log('Data',data);
           console.log('rows',data.rows);
-          if (data.records === 0) {
-            swal.fire({
-              title: 'No hay registros',
-              text: 'No hay registros en la base de datos',
-              icon: 'warning',
-              confirmButtonText: 'Ok'
-            });
-          }
+          // if (data.records === 0) {
+          //   swal.fire({
+          //     title: 'No hay registros',
+          //     text: 'No hay registros en la base de datos',
+          //     icon: 'warning',
+          //     confirmButtonText: 'Ok'
+          //   });
+          // }
        
         },
         editurl: 'http://localhost:8000/data', 

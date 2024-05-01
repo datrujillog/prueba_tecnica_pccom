@@ -44,7 +44,7 @@ class UserController extends Controller
 
         $skip = ($page - 1) * $rows;
 
-        $query = Usuario::query();
+        $query = Usuario::query(); 
 
         // Aplicar los filtros
         if (isset($filters['rules'])) {
