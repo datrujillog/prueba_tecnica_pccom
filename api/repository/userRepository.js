@@ -85,10 +85,10 @@ class UserRepository {
             const totalPageCount = Math.ceil(totalUsersCount / parseInt(queryParams.rows));
 
             const response = {
-                page: queryParams.page, // número de página actual
-                total: totalPageCount, // total de páginas
-                records: totalUsersCount, // total de registros
-                rows: users // registros para la página actual
+                page: queryParams.page, 
+                total: totalPageCount, 
+                records: totalUsersCount, 
+                rows: users
             };
             return response;
 
