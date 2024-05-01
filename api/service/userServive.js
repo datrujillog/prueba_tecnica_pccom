@@ -27,16 +27,6 @@ class UserService {
         return response;
     }
 
-    // async getAllUsers(page, pageSize) {
-    //     try {
-    //         const { users, hasMore } = await userRepository.getAllUsers(page, pageSize);
-    //         return { users, hasMore };
-    //     } catch (error) {
-    //         throw new Error(`Error fetching users: ${error.message}`);
-    //     }
-    // }
-    
-
 
     async getUserById(id) {
         const user = await userRepository.getUserById(id);
