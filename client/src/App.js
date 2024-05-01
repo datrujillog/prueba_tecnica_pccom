@@ -11,9 +11,9 @@ function App() {
       <Header />
       {/* <Jqgrid /> */}
 
-      <Php />
+      {/* <Php /> */}
 
-      {/* <JqgridDos /> */}
+      <JqgridDos />
       
     </div>
   );
