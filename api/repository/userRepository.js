@@ -22,6 +22,8 @@ class UserRepository {
 
         try {
 
+            const userById = await this.getUserByEmail(data.Email);
+
             delete data.id;
             const user = await this.#userModel.createMany({ data });
             if (user.count == 0) throw new NotFound("User not created")
@@ -36,20 +38,6 @@ class UserRepository {
             throw new BadRequest(error.message);
         }
     }
-
-    // async getAllUsers() {
-
-    //     try {
-
-    //         const users = await this.#userModel.findMany();
-    //         if (users.length === 0) throw new NotFound("Users not found");
-
-    //         return users;
-
-    //     } catch (error) {
-    //         throw new BadRequest(error.message);
-    //     }
-    // }
 
 
     async getAllUsers(queryParams) {
@@ -103,8 +91,6 @@ class UserRepository {
             // }
         }
     }
-
-
 
 
     async getUserById(id) {
@@ -183,6 +169,19 @@ class UserRepository {
             const hasMore = (pageNumber * take) < totalUsersCount;
             return { users, hasMore }
 
+        } catch (error) {
+            throw new BadRequest(error.message);
+        }
+    }
+
+    async getUserByEmail(email) {
+        try {
+            const user = await this.#userModel.findMany({
+                where: {
+                    Email: email
+                }
+            });
+            return user;
         } catch (error) {
             throw new BadRequest(error.message);
         }
