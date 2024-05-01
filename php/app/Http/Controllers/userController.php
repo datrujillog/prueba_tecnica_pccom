@@ -9,26 +9,16 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    // public function list()
-    // {
-    //     $usuario = usuario::all();
-    //     return $usuario;
-    //     // phpinfo();
-    // }
-
-
-
-
-
+  
     public function list(Request $request)
     {
-        $page = $request->input('page', 1); 
-        $rows = $request->input('rows', 15); 
+        $page = $request->input('page', 1);
+        $rows = $request->input('rows', 15);
 
-        $skip = ($page - 1) * $rows; 
+        $skip = ($page - 1) * $rows;
 
-        $usuarios = Usuario::skip($skip)->take($rows)->get(); 
-        $totalUsuarios = Usuario::count(); 
+        $usuarios = Usuario::skip($skip)->take($rows)->get();
+        $totalUsuarios = Usuario::count();
 
         $totalPaginas = ceil($totalUsuarios / $rows);  // Calcular el total de páginas
 
