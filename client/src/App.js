@@ -2,9 +2,7 @@ import './App.css';
 import Header from './jqGrid/header';
 import JqgridDos from './jqGrid/JqgridDos';
 import Jqgrid from './jqGrid/jqgrid';
-// import JqGridComponent from './jqGrid/JqGridComponent';
-// import JqGridPhp from './jqGrid/jqGridPhp';
-// import Paginate from './jqGrid/JqgridDos';
+import Php from './jqGrid/PHP';
 
 function App() {
   return (
@@ -15,9 +13,10 @@ function App() {
       <Header />
       {/* <Jqgrid /> */}
       {/* <Jqgrid /> */}
-      {/* <JqGridPhp /> */}
 
-      <JqgridDos />
+      <Php />
+
+      {/* <JqgridDos /> */}
       
     </div>
   );
