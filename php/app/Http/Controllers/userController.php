@@ -9,12 +9,41 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    public function list()
+    // public function list()
+    // {
+    //     $usuario = usuario::all();
+    //     return $usuario;
+    //     // phpinfo();
+    // }
+
+
+
+
+
+    public function list(Request $request)
     {
-        $usuario = usuario::all();
-        return $usuario;
-        // phpinfo();
+        $page = $request->input('page', 1); // obtener el número de página de la solicitud, por defecto es 1
+        $rows = $request->input('rows', 15); // obtener el número de filas de la solicitud, por defecto es 15
+
+        $skip = ($page - 1) * $rows; // calcular cuántos usuarios saltar
+
+        $usuarios = Usuario::skip($skip)->take($rows)->get(); // saltar los usuarios y tomar la cantidad especificada
+        $totalUsuarios = Usuario::count(); // obtener el total de usuarios
+
+        $totalPaginas = ceil($totalUsuarios / $rows); // calcular el total de páginas
+
+        $response = [
+            'page' => $page,
+            'total' => $totalPaginas,
+            'records' => $totalUsuarios,
+            'rows' => $usuarios
+        ];
+
+        return response()->json($response);
     }
+
+
+
 
     public function create(Request $request)
     {
@@ -89,8 +118,6 @@ class UserController extends Controller
                 'message' => 'Usuario actualizado correctamente',
                 'data' => $usuario  // Devolver los datos del usuario actualizado
             ];
-
-            
         } else if ($request->oper == 'add') {
             $usuario = $this->create($request);
         } else if ($request->oper == 'del') {
@@ -105,9 +132,9 @@ class UserController extends Controller
 
     public function delete($id)
     {
-        $usuario = usuario::find($id); 
+        $usuario = usuario::find($id);
 
-        if ($usuario == null) { 
+        if ($usuario == null) {
             return [
                 'status' => 'error',
                 'message' => 'Usuario no encontrado'
