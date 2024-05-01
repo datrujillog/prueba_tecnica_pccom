@@ -10,16 +10,52 @@ use Illuminate\Validation\ValidationException;
 class UserController extends Controller
 {
   
+    // public function list(Request $request)
+    // {
+    //     $page = $request->input('page', 1);
+    //     $rows = $request->input('rows', 15);
+
+    //     $skip = ($page - 1) * $rows;
+
+    //     $usuarios = Usuario::skip($skip)->take($rows)->get();
+    //     $totalUsuarios = Usuario::count();
+
+    //     $totalPaginas = ceil($totalUsuarios / $rows);  // Calcular el total de páginas
+
+    //     $response = [
+    //         'page' => $page,
+    //         'total' => $totalPaginas,
+    //         'records' => $totalUsuarios,
+    //         'rows' => $usuarios
+    //     ];
+
+    //     return response()->json($response);
+    // }
+
+
+
+
+    
     public function list(Request $request)
     {
         $page = $request->input('page', 1);
         $rows = $request->input('rows', 15);
+        $filters = json_decode($request->input('filters', '{}'), true);
 
         $skip = ($page - 1) * $rows;
 
-        $usuarios = Usuario::skip($skip)->take($rows)->get();
-        $totalUsuarios = Usuario::count();
+        $query = Usuario::query();
 
+        // Aplicar los filtros
+        if (isset($filters['rules'])) {
+            foreach ($filters['rules'] as $rule) {
+                $query->where($rule['field'], $rule['data']);
+            }
+        }
+
+        $usuarios = $query->skip($skip)->take($rows)->get();
+        // $totalUsuarios = $query->count();
+        $totalUsuarios = Usuario::count();
         $totalPaginas = ceil($totalUsuarios / $rows);  // Calcular el total de páginas
 
         $response = [
@@ -31,6 +67,7 @@ class UserController extends Controller
 
         return response()->json($response);
     }
+
 
 
 
