@@ -35,7 +35,6 @@ const Php = () => {
           , { name: 'address', index: 'Address', width: 100, editable: true }
           , { name: 'city', index: 'City', width: 100, editable: true }
         ],
-
         rowNum: 5,
         rowList: [5, 10, 20],
         pager: '#prowed3',
@@ -46,10 +45,10 @@ const Php = () => {
         edit: true,
         height: '20000%',
         loadComplete: function (data) {
-            console.log("DATA  <>",data.id);
+            console.log("DATA  <>",data);
        
         },
-        editurl: 'http://localhost:8000/update', 
+        editurl: 'http://localhost:8000/data', 
         caption: "Prueba Tecnica en PCCOM "
       });
       jQuery("#rowed3").jqGrid('navGrid', '#prowed3', { edit: true, add: true, del: true, search: true, }, {}, {}, {}, {
