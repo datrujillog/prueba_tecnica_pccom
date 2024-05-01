@@ -22,15 +22,15 @@ class UserController extends Controller
 
     public function list(Request $request)
     {
-        $page = $request->input('page', 1); // obtener el número de página de la solicitud, por defecto es 1
-        $rows = $request->input('rows', 15); // obtener el número de filas de la solicitud, por defecto es 15
+        $page = $request->input('page', 1); 
+        $rows = $request->input('rows', 15); 
 
-        $skip = ($page - 1) * $rows; // calcular cuántos usuarios saltar
+        $skip = ($page - 1) * $rows; 
 
-        $usuarios = Usuario::skip($skip)->take($rows)->get(); // saltar los usuarios y tomar la cantidad especificada
-        $totalUsuarios = Usuario::count(); // obtener el total de usuarios
+        $usuarios = Usuario::skip($skip)->take($rows)->get(); 
+        $totalUsuarios = Usuario::count(); 
 
-        $totalPaginas = ceil($totalUsuarios / $rows); // calcular el total de páginas
+        $totalPaginas = ceil($totalUsuarios / $rows);  // Calcular el total de páginas
 
         $response = [
             'page' => $page,
