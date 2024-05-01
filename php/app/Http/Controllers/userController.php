@@ -35,21 +35,29 @@ class UserController extends Controller
 
 
 
+    
     public function create(Request $request)
     {
+        $messages = [
+            'email.unique' => 'El correo electrónico ya está registrado.',
+        ];
+
         $validator = Validator::make($request->all(), [
             'Name' => 'required',
             'LastName' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:usuarios,email',
             'password' => 'required',
             'phone' => 'required',
             'address' => 'required',
             'city' => 'required',
             'oper' => 'required'
-        ]);
+        ], $messages);
 
         if ($validator->fails()) {
-            throw new ValidationException($validator);
+            return response()->json([
+                'status' => 'error',
+                'message' => $validator->errors()->first(),
+            ], 400);
         }
 
         $usuario = usuario::create($request->all());
@@ -61,6 +69,7 @@ class UserController extends Controller
                 'data' => $usuario
             ];
     }
+    
 
 
     public function datos(Request $request)
